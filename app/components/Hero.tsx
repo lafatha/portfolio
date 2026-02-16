@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FaLinkedin, FaGithub, FaMedium } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaMedium, FaYoutube } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 
 export default function Hero() {
@@ -43,6 +43,9 @@ export default function Hero() {
             </a>
             <a href="https://github.com/lafatha" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
               <FaGithub size={20} />
+            </a>
+            <a href="https://www.youtube.com/@GagahAthallahFatha" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+              <FaYoutube size={20} />
             </a>
             <a href="https://medium.com/@athallahfatha" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
               <FaMedium size={20} />
