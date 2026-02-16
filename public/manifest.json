@@ -1,0 +1,18 @@
+{
+  "name": "Gagah Athallah Fatha",
+  "short_name": "Gagah Portfolio",
+  "description": "Gagah Athallah Fatha is a Fullstack Developer, Business Analyst, and Supply Chain Analyst with expertise in web development, business analysis, and supply chain optimization. Currently studying at Bandung Institute of Technology (ITB), he builds innovative solutions including onchain gaming platforms and enterprise ERP systems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://media.licdn.com/dms/image/v2/D5603AQGkk3iMMULGDQ/profile-displayphoto-scale_200_200/B56ZraU.2DI8AY-/0/1764599527154?e=1772668800&v=beta&t=Z4KXmxxOc-lQ-nvq5AW_O4uYifdm4NfaCNfGj_CvqQs",
+      "sizes": "200x200",
+      "type": "image/jpeg"
+    }
+  ]
+}
+
