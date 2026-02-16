@@ -101,11 +101,6 @@ export default function GitHubActivity() {
     }
   };
 
-  const getMonthLabels = () => {
-    // Return months from January to December
-    return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  };
-
   return (
     <section className="mb-16">
       <div className="flex items-center gap-2 mb-6 border-t border-neutral-200 pt-8">
@@ -115,12 +110,6 @@ export default function GitHubActivity() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <div className="flex justify-between text-xs text-neutral-500 font-sans px-1">
-          {getMonthLabels().map((month, i) => (
-            <span key={i}>{month}</span>
-          ))}
-        </div>
-
         <div className="w-full overflow-x-auto pb-2 scrollbar-hide">
           <div className="grid grid-rows-[repeat(7,minmax(0,1fr))] grid-flow-col gap-0.5 min-w-fit">
             {loading

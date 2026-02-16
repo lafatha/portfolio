@@ -21,11 +21,21 @@ export default function Hero() {
               Gagah Athallah Fatha
             </h1>
           </div>
-          <span className="text-neutral-500 text-base mb-6 mt-2">Fullstack | Business Analyst | Supply Chain Analyst</span>
-          
-          <p className="text-neutral-800 leading-relaxed max-w-lg mb-6">
-            Hi! my name is Gagah and welcome to my Portfolio Site.
-          </p>
+          <span className="text-neutral-500 text-base mb-6 mt-3">
+            Fullstack | Business Analyst | Supply Chain Analyst
+          </span>
+
+          <div className="text-neutral-800 text-xs md:text-sm leading-relaxed max-w-xl mb-6 space-y-3">
+            <p>
+              I design data systems, business dashboards, and AI-driven tools that turn operational data into actionable insights.
+            </p>
+            <p>
+              Experienced in analytics architecture, backend systems, and building internal platforms for smarter decision-making.
+            </p>
+            <p>
+              Currently focused on AI-powered automation and business intelligence solutions.
+            </p>
+          </div>
 
           <div className="flex items-center gap-5 text-neutral-700">
             <a href="https://linkedin.com/in/gagahathallahfatha" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
