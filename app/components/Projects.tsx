@@ -42,13 +42,11 @@ export default function Projects() {
   };
 
   return (
-    <section className="mb-16">
-      <div className="flex items-center gap-2 mb-6 border-t border-neutral-200 pt-8">
-        <h2 className="text-2xl font-serif font-medium text-neutral-900">
-          Projects
-        </h2>
+    <section className="projects-section">
+      <div className="projects-header">
+        <h2 className="projects-title">Projects</h2>
       </div>
-      <div className="flex flex-col">
+      <div className="projects-list">
         {projects.map((project, index) => (
           <div key={index}>
             <a
@@ -56,9 +54,9 @@ export default function Projects() {
               onClick={(e) => handleProjectClick(e, project.name, project.hasPreview, project.projectKey)}
               target={project.hasPreview ? undefined : "_blank"}
               rel={project.hasPreview ? undefined : "noopener noreferrer"}
-              className="flex items-center justify-between py-4 border-b border-neutral-200 hover:bg-neutral-100 transition-colors duration-150 px-2 -mx-2 rounded-sm group cursor-pointer"
+              className="project-row group"
             >
-              <div className="flex items-center gap-3 text-neutral-800 font-medium group-hover:text-neutral-900">
+              <div className="project-row-group">
                 <ChevronRight size={18} className="text-neutral-400 group-hover:text-neutral-600 transition-colors" />
                 <span>{project.name}</span>
               </div>

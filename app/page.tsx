@@ -17,7 +17,7 @@ export default function Home() {
         <Projects />
         <GitHubActivity />
         <Footer />
-      </div>
-    </main>
+        </div>
+      </main>
   );
 }
