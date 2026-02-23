@@ -28,7 +28,7 @@ The site follows a clean, flat layout inspired by modern profile pages:
 - **LinkedIn‑style hero header**
   - Full‑width banner image at the top of the column.
   - Circular profile photo overlapping the lower edge of the banner, with a subtle white ring (stroke) around the image.
-  - Name (`Gagah Athallah Fatha`) on the left, followed by a compact location pill (`Bandung, Indonesia`) using the same font and color system as the rest of the hero.
+  - Name (`Gagah Athallah Fatha`) on the left.
   - Subtitle and a three‑paragraph bio beneath the name, tuned for small type sizes to emphasize hierarchy instead of loud typography.
 
 - **Visual style**
@@ -68,3 +68,8 @@ http://localhost:3000
 ```
 
 The project is designed to be easy to tweak. If you want to change copy, skills, or projects, you usually only need to touch the corresponding component in `app/components`.
+
+### License
+
+This project is released under the **MIT License**.  
+See the `LICENSE` file in the root of the repository for the full text.

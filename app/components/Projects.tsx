@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { ChevronRight, Link } from "lucide-react";
 
@@ -33,6 +33,29 @@ const projectImages: { [key: string]: string[] } = {
 
 export default function Projects() {
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const isDraggingRef = useRef(false);
+  const dragStateRef = useRef({ startX: 0, scrollLeft: 0 });
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!scrollRef.current) return;
+    isDraggingRef.current = true;
+    dragStateRef.current = {
+      startX: e.clientX,
+      scrollLeft: scrollRef.current.scrollLeft,
+    };
+  };
+
+  const stopDragging = () => {
+    isDraggingRef.current = false;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current || !scrollRef.current) return;
+    e.preventDefault();
+    const deltaX = e.clientX - dragStateRef.current.startX;
+    scrollRef.current.scrollLeft = dragStateRef.current.scrollLeft - deltaX;
+  };
 
   const handleProjectClick = (e: React.MouseEvent, projectName: string, hasPreview: boolean, projectKey: string) => {
     if (hasPreview) {
@@ -65,7 +88,14 @@ export default function Projects() {
             
             {project.hasPreview && expandedProject === project.projectKey && (
               <div className="mt-4 mb-4 px-2">
-                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+                <div
+                  ref={scrollRef}
+                  className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide cursor-grab select-none"
+                  onMouseDown={handleMouseDown}
+                  onMouseLeave={stopDragging}
+                  onMouseUp={stopDragging}
+                  onMouseMove={handleMouseMove}
+                >
                   {projectImages[project.projectKey]?.map((image, imgIndex) => (
                     <div key={imgIndex} className="flex-shrink-0">
                       <div className="relative w-[210px] aspect-video md:w-[280px] rounded-lg overflow-hidden">
@@ -74,6 +104,7 @@ export default function Projects() {
                           alt={`${project.name} ${imgIndex + 1}`}
                           fill
                           className="object-cover"
+                          draggable={false}
                         />
                       </div>
                     </div>
@@ -82,6 +113,17 @@ export default function Projects() {
                 <p className="text-xs text-neutral-600 leading-relaxed mt-4 max-w-4xl">
                   {projectDescriptions[project.projectKey]}
                 </p>
+                {project.projectKey === "baseRealms" && (
+                  <a
+                    href="https://www.baserealms.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center gap-2 text-xs text-neutral-600 hover:text-neutral-900 transition-colors"
+                  >
+                    <Link size={14} className="text-neutral-400 group-hover:text-neutral-600 transition-colors" />
+                    <span>Click here to see the Project</span>
+                  </a>
+                )}
               </div>
             )}
           </div>
