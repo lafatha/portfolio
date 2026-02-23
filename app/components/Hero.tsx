@@ -5,13 +5,24 @@ import { HiOutlineMail } from "react-icons/hi";
 export default function Hero() {
   return (
     <section className="hero-section">
+      <div className="-mx-8 md:-mx-12">
+        <div className="hero-banner">
+          <Image
+            src="/backgr.png"
+            alt="Profile banner"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      </div>
       <div className="hero-inner">
         <div className="hero-avatar">
           <Image
             src="https://media.licdn.com/dms/image/v2/D5603AQGkk3iMMULGDQ/profile-displayphoto-scale_200_200/B56ZraU.2DI8AY-/0/1764599527154?e=1772668800&v=beta&t=Z4KXmxxOc-lQ-nvq5AW_O4uYifdm4NfaCNfGj_CvqQs"
             alt="Gagah Athallah Fatha"
             fill
-            className="rounded-full object-cover"
+            className="hero-avatar-image object-cover"
             priority
           />
         </div>
