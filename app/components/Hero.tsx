@@ -38,13 +38,24 @@ export default function Hero() {
 
           <div className="hero-bio">
             <p>
-              I design data systems, business dashboards, and AI-driven tools that turn operational data into actionable insights.
+              I help organizations translate{" "}
+              <span className="inline-block bg-[#ebebeb] px-1 py-px rounded font-semibold">
+                business challenges
+              </span>{" "}
+              into{" "}
+              <span className="inline-block bg-[#ebebeb] px-1 py-px rounded font-semibold">
+                structured data
+              </span>{" "}
+              and{" "}
+              <span className="inline-block bg-[#ebebeb] px-1 py-px rounded font-semibold">
+                technology solutions.
+              </span>
             </p>
             <p>
-              Experienced in analytics architecture, backend systems, and building internal platforms for smarter decision-making.
+              Experienced in analytics design, system thinking, and building decision-support tools that improve operational clarity.
             </p>
             <p>
-              Currently focused on AI-powered automation and business intelligence solutions.
+              Interested in leveraging AI and data systems to drive smarter, evidence-based business strategies.
             </p>
           </div>
 
