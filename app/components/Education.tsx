@@ -24,7 +24,13 @@ export default function Education() {
                   src="/ITBlack.png"
                   alt="ITB"
                   fill
-                  className="object-contain"
+                  className="object-contain itb-logo-light"
+                />
+                <Image
+                  src="/ITWhite.png"
+                  alt="ITB"
+                  fill
+                  className="object-contain itb-logo-dark"
                 />
               </div>
               <span>{item.name}</span>

@@ -87,7 +87,7 @@ export default function GitHubActivity() {
   const getPromptColor = (level: number) => {
     switch (level) {
       case 0:
-        return "bg-black";
+        return "gh-dot-empty";
       case 1:
         return "bg-green-700";
       case 2:
@@ -97,7 +97,7 @@ export default function GitHubActivity() {
       case 4:
         return "bg-green-400";
       default:
-        return "bg-black";
+        return "gh-dot-empty";
     }
   };
 
@@ -116,7 +116,7 @@ export default function GitHubActivity() {
               ? Array.from({ length: 364 }).map((_, i) => (
                   <div
                     key={i}
-                    className="w-2.5 h-2.5 rounded-sm bg-black animate-pulse"
+                    className="w-2.5 h-2.5 rounded-sm gh-dot-empty animate-pulse"
                   />
                 ))
               : contributionData.map((day, i) => (
@@ -134,7 +134,7 @@ export default function GitHubActivity() {
           <div className="flex items-center gap-2 text-xs">
             <span>Less</span>
             <div className="flex gap-1">
-              <div className="w-3 h-3 rounded-sm bg-black"></div>
+              <div className="w-3 h-3 rounded-sm gh-dot-empty"></div>
               <div className="w-3 h-3 rounded-sm bg-green-700"></div>
               <div className="w-3 h-3 rounded-sm bg-green-600"></div>
               <div className="w-3 h-3 rounded-sm bg-green-500"></div>

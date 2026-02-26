@@ -8,11 +8,18 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --dot-empty: #000000;
+}
+
+.theme-dark {
+  --background: #0f0f0f;
+  --foreground: #f1f1f1;
+  --dot-empty: #3a3a3a;
 }
 
 body {
   color: var(--foreground);
-  background: #ffffff;
+  background: var(--background);
   font-family: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -240,4 +247,204 @@ h1, h2, h3, h4, h5, h6 {
 
 .cursor-grab:active {
   cursor: grabbing;
+}
+
+/* ===== DARK MODE ===== */
+
+/* Smooth theme transitions */
+body,
+.navbar,
+.navbar-link,
+.section-title,
+.hero-name,
+.hero-subtitle,
+.hero-bio,
+.hero-socials,
+.skill-badge,
+.projects-title,
+.project-row,
+.project-row-group {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Navbar — controlled purely via CSS, no Tailwind bg class */
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.navbar-link {
+  color: #525252;
+}
+
+.navbar-link:hover {
+  color: #171717;
+}
+
+/* Dark mode: navbar matches body background */
+.theme-dark .navbar {
+  background-color: #0f0f0f;
+  border-bottom-color: #3f3f3f;
+}
+
+.theme-dark .navbar-link {
+  color: #f1f1f1;
+}
+
+.theme-dark .navbar-link:hover {
+  color: #ffffff;
+}
+
+/* ITB logo — smooth swap between black and white versions */
+.itb-logo-light,
+.itb-logo-dark {
+  transition: opacity 0.25s ease;
+}
+
+.itb-logo-light {
+  opacity: 1;
+}
+
+.itb-logo-dark {
+  opacity: 0;
+}
+
+.theme-dark .itb-logo-light {
+  opacity: 0;
+}
+
+.theme-dark .itb-logo-dark {
+  opacity: 1;
+}
+
+/* Container & all border-neutral-200 borders */
+.theme-dark .border-neutral-200 {
+  border-color: #3f3f3f !important;
+}
+
+/* Section headers */
+.theme-dark .section-header {
+  border-color: #3f3f3f;
+}
+
+.theme-dark .section-title {
+  color: #f1f1f1;
+}
+
+/* Hero */
+.theme-dark .hero-name {
+  color: #f1f1f1;
+}
+
+.theme-dark .hero-subtitle {
+  color: #aaaaaa;
+}
+
+.theme-dark .hero-bio {
+  color: #d4d4d4;
+}
+
+.theme-dark .hero-bio span[class*="bg-"] {
+  background-color: #2a2a2a !important;
+  color: #f1f1f1;
+}
+
+/* Social icons — white */
+.theme-dark .hero-socials {
+  color: #f1f1f1;
+}
+
+.theme-dark .hero-socials a {
+  color: #f1f1f1;
+}
+
+/* Skills */
+.theme-dark .skill-badge {
+  border-color: #3f3f3f;
+  color: #e5e5e5;
+}
+
+.theme-dark .skill-badge:hover {
+  background-color: #2a2a2a;
+}
+
+.theme-dark .skill-badge-icon {
+  color: #e5e5e5;
+}
+
+/* Projects */
+.theme-dark .projects-header {
+  border-color: #3f3f3f;
+}
+
+.theme-dark .projects-title {
+  color: #f1f1f1;
+}
+
+.theme-dark .project-row {
+  border-color: #3f3f3f;
+}
+
+.theme-dark .project-row:hover {
+  background-color: #2a2a2a;
+}
+
+.theme-dark .project-row-group {
+  color: #e5e5e5;
+}
+
+.theme-dark .project-row:hover .project-row-group {
+  color: #f1f1f1;
+}
+
+/* Tailwind text color utilities */
+.theme-dark .text-neutral-900 {
+  color: #f1f1f1 !important;
+}
+
+.theme-dark .text-neutral-800 {
+  color: #e5e5e5 !important;
+}
+
+.theme-dark .text-neutral-700 {
+  color: #d4d4d4 !important;
+}
+
+.theme-dark .text-neutral-600 {
+  color: #aaaaaa !important;
+}
+
+.theme-dark .text-neutral-500 {
+  color: #888888 !important;
+}
+
+.theme-dark .text-neutral-400 {
+  color: #f1f1f1 !important;
+}
+
+/* Hover text overrides */
+.theme-dark .hover\:text-neutral-900:hover,
+.theme-dark .hover\:text-neutral-800:hover,
+.theme-dark .hover\:text-neutral-700:hover {
+  color: #ffffff !important;
+}
+
+/* Footer */
+.theme-dark footer {
+  border-color: #3f3f3f;
+}
+
+/* Gallery & section image placeholder */
+.theme-dark .bg-neutral-100 {
+  background-color: #2a2a2a !important;
+}
+
+/* GitHub stats section heading */
+.theme-dark section > div > h2 {
+  color: #f1f1f1;
+}
+
+/* GitHub stats — level-0 (empty) dots */
+.gh-dot-empty {
+  background-color: var(--dot-empty);
 }
