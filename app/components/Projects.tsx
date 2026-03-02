@@ -179,7 +179,7 @@ export default function Projects() {
 
       {lightboxImage && (
         <div
-          className="fixed inset-0 z-40 flex items-center justify-center bg-neutral-900/70"
+          className="fixed inset-0 z-60 flex items-center justify-center bg-neutral-900/70"
           onClick={() => setLightboxImage(null)}
         >
           <div
