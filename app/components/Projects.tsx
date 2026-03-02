@@ -63,18 +63,6 @@ export default function Projects() {
     scrollRef.current.scrollLeft = dragStateRef.current.scrollLeft - deltaX;
   };
 
-  const handleProjectClick = (
-    e: React.MouseEvent,
-    projectName: string,
-    hasPreview: boolean,
-    projectKey: string,
-  ) => {
-    if (hasPreview) {
-      e.preventDefault();
-      setExpandedProject(expandedProject === projectKey ? null : projectKey);
-    }
-  };
-
   useEffect(() => {
     if (!lightboxImage) return;
 
@@ -98,14 +86,12 @@ export default function Projects() {
         <div className="projects-list">
           {projects.map((project, index) => (
             <div key={index}>
-              <a
-                href={project.url}
-                onClick={(e) =>
-                  handleProjectClick(e, project.name, project.hasPreview, project.projectKey)
+              <button
+                type="button"
+                onClick={() =>
+                  setExpandedProject(expandedProject === project.projectKey ? null : project.projectKey)
                 }
-                target={project.hasPreview ? undefined : "_blank"}
-                rel={project.hasPreview ? undefined : "noopener noreferrer"}
-                className="project-row group"
+                className="project-row group w-full text-left"
               >
                 <div className="project-row-group">
                   <ChevronRight
@@ -118,7 +104,7 @@ export default function Projects() {
                   size={14}
                   className="text-neutral-400 group-hover:text-neutral-600 transition-colors"
                 />
-              </a>
+              </button>
 
               {project.hasPreview && expandedProject === project.projectKey && (
                 <div className="mt-4 mb-4 px-2">

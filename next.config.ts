@@ -6,7 +6,7 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value: isProd
-      ? "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ui-avatars.com https://github.com https://media.licdn.com data:; font-src 'self'; connect-src 'self' https://github-contributions-api.jogruber.de; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests;"
+      ? "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ui-avatars.com https://github.com https://media.licdn.com data:; font-src 'self'; connect-src 'self' https://github-contributions-api.jogruber.de https://vitals.vercel-insights.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests;"
       : "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ui-avatars.com https://github.com https://media.licdn.com data:; font-src 'self'; connect-src 'self' ws://localhost:3000 wss://localhost:3000 https://github-contributions-api.jogruber.de; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self';",
   },
   { key: "X-Frame-Options", value: "SAMEORIGIN" },

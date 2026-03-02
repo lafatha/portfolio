@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const stored = window.localStorage.getItem("theme");
@@ -20,6 +21,7 @@ export default function Navbar() {
     }
 
     setIsDark(dark);
+    setMounted(true);
   }, []);
 
   function toggleTheme() {
@@ -50,8 +52,9 @@ export default function Navbar() {
           }
         }}
         className="navbar-link font-medium cursor-pointer select-none"
+        suppressHydrationWarning
       >
-        {isDark ? "light" : "dark"}
+        {mounted ? (isDark ? "light" : "dark") : "dark"}
       </span>
     </nav>
   );
