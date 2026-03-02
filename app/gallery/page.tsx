@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Gallery - Gagah Athallah Fatha",
+  description:
+    "A visual gallery from the personal portfolio of Gagah Athallah Fatha, showcasing moments, work, and experiences behind his projects.",
+};
 
 export default function GalleryPage() {
   return (
