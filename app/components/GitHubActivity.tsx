@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface ContributionDay {
   date: string;
@@ -19,8 +19,35 @@ export default function GitHubActivity() {
   const [contributionData, setContributionData] = useState<ContributionDay[]>([]);
   const [totalContributions, setTotalContributions] = useState<number>(0);
   const [loading, setLoading] = useState(true);
+  const [shouldFetch, setShouldFetch] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    if (shouldFetch) return;
+
+    const node = sectionRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShouldFetch(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px 0px" }
+    );
+
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [shouldFetch]);
+
+  useEffect(() => {
+    if (!shouldFetch) return;
+
     async function fetchContributions() {
       try {
         const currentYear = new Date().getFullYear();
@@ -82,7 +109,7 @@ export default function GitHubActivity() {
     }
 
     fetchContributions();
-  }, []);
+  }, [shouldFetch]);
 
   const getPromptColor = (level: number) => {
     switch (level) {
@@ -102,7 +129,7 @@ export default function GitHubActivity() {
   };
 
   return (
-    <section className="mb-16">
+    <section ref={sectionRef} className="mb-16">
       <div className="flex items-center gap-2 mb-6 border-t border-neutral-200 pt-8">
         <h2 className="text-2xl font-serif font-medium text-neutral-900">
           Github Stats

@@ -2,28 +2,34 @@ import Image from "next/image";
 import { FaLinkedin, FaGithub, FaMedium, FaYoutube } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 
+import heroBanner from "@/public/backgr.webp";
+import profilePic from "@/public/profilepic.webp";
+
 export default function Hero() {
   return (
     <section className="hero-section">
       <div className="-mx-8 md:-mx-12">
         <div className="hero-banner">
           <Image
-            src="/backgr.png"
+            src={heroBanner}
             alt="Profile banner"
             fill
             className="object-cover"
             priority
+            placeholder="blur"
+            sizes="(min-width: 768px) 768px, 100vw"
           />
         </div>
       </div>
       <div className="hero-inner">
         <div className="hero-avatar">
           <Image
-            src="https://media.licdn.com/dms/image/v2/D5603AQGkk3iMMULGDQ/profile-displayphoto-scale_200_200/B56ZraU.2DI8AY-/0/1764599527154?e=1772668800&v=beta&t=Z4KXmxxOc-lQ-nvq5AW_O4uYifdm4NfaCNfGj_CvqQs"
+            src={profilePic}
             alt="Gagah Athallah Fatha"
             fill
             className="hero-avatar-image object-cover"
-            priority
+            placeholder="blur"
+            sizes="(min-width: 768px) 112px, 96px"
           />
         </div>
         <div className="hero-content">

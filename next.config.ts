@@ -19,6 +19,10 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    // Ensures Next uses this project as the workspace root (avoids picking a parent lockfile).
+    root: __dirname,
+  },
   images: {
     remotePatterns: [
       {

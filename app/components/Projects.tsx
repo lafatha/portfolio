@@ -10,14 +10,14 @@ const projects = [
 ];
 
 const baseRealmsImages = [
-  "/baserealms/1.jpeg",
-  "/baserealms/2.jpeg",
-  "/baserealms/3.jpeg",
-  "/baserealms/4.jpeg",
-  "/baserealms/5.jpeg",
+  "/baserealms/1.webp",
+  "/baserealms/2.webp",
+  "/baserealms/3.webp",
+  "/baserealms/4.webp",
+  "/baserealms/5.webp",
 ];
 
-const erpSystemImages = ["/stock/stock.jpg"];
+const erpSystemImages = ["/stock/stock.webp"];
 
 const projectDescriptions: { [key: string]: string } = {
   baseRealms:
@@ -134,6 +134,7 @@ export default function Projects() {
                             fill
                             className="object-cover"
                             draggable={false}
+                            sizes="(min-width: 768px) 280px, 210px"
                           />
                         </button>
                       </div>
@@ -173,7 +174,13 @@ export default function Projects() {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="relative w-full aspect-video md:aspect-[16/9] rounded-xl overflow-hidden">
-              <Image src={lightboxImage} alt="Project preview" fill className="object-contain" />
+              <Image
+                src={lightboxImage}
+                alt="Project preview"
+                fill
+                className="object-contain"
+                sizes="(min-width: 1024px) 768px, 100vw"
+              />
             </div>
           </div>
         </div>

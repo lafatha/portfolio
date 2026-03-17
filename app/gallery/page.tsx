@@ -21,11 +21,12 @@ export default function GalleryPage() {
               <div className="flex flex-col gap-4">
                 <div className="relative w-full aspect-square rounded-lg overflow-hidden bg-neutral-100 group">
                   <Image
-                    src="/gallery/foto1.jpg"
+                    src="/gallery/foto1.webp"
                     alt="Gallery photo 1"
                     fill
                     className="object-cover"
                     priority
+                    sizes="(min-width: 768px) 384px, 100vw"
                   />
                   <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
                     <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
@@ -35,10 +36,11 @@ export default function GalleryPage() {
                 </div>
                 <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 group">
                   <Image
-                    src="/gallery/foto4.jpg"
+                    src="/gallery/foto4.webp"
                     alt="Gallery photo 4"
                     fill
                     className="object-cover"
+                    sizes="(min-width: 768px) 384px, 100vw"
                   />
                   <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
                     <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
@@ -53,10 +55,11 @@ export default function GalleryPage() {
               <div className="flex flex-col gap-4">
                 <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 group">
                   <Image
-                    src="/gallery/foto2.jpeg"
+                    src="/gallery/foto2.webp"
                     alt="Gallery photo 2"
                     fill
                     className="object-cover"
+                    sizes="(min-width: 768px) 384px, 100vw"
                   />
                   <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
                     <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
@@ -66,10 +69,11 @@ export default function GalleryPage() {
                 </div>
                 <div className="relative w-full aspect-[3/3] rounded-lg overflow-hidden bg-neutral-100 group">
                   <Image
-                    src="/gallery/foto3.jpeg"
+                    src="/gallery/foto3.webp"
                     alt="Gallery photo 3"
                     fill
                     className="object-cover"
+                    sizes="(min-width: 768px) 384px, 100vw"
                   />
                   <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
                     <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
@@ -79,10 +83,11 @@ export default function GalleryPage() {
                 </div>
                 <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 group">
                   <Image
-                    src="/gallery/foto5.jpeg"
+                    src="/gallery/foto5.webp"
                     alt="Gallery photo 5"
                     fill
                     className="object-cover"
+                    sizes="(min-width: 768px) 384px, 100vw"
                   />
                   <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
                     <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
