@@ -15,12 +15,16 @@ export const metadata: Metadata = {
   metadataBase: baseUrl,
   title: "Gagah Athallah Fatha",
   description:
-    "Gagah Athallah Fatha is a Fullstack Developer, Business Analyst, and Supply Chain Analyst with expertise in web development, business analysis, and supply chain optimization. Currently studying at Bandung Institute of Technology (ITB), he builds innovative solutions including onchain gaming platforms and enterprise ERP systems.",
+    "Gagah Athallah Fatha is a Fullstack Developer, Business Analyst, Data Analyst, AI Engineer, and Supply Chain Analyst with expertise in web development, business analysis, data analytics, artificial intelligence, machine learning, and supply chain optimization. Currently studying at Bandung Institute of Technology (ITB), he builds innovative solutions including onchain gaming platforms and enterprise ERP systems.",
   manifest: "/manifest.json",
   keywords: [
     "Gagah Athallah Fatha",
     "Fullstack Developer",
     "Business Analyst",
+    "Data Analyst",
+    "AI Engineer",
+    "Artificial Intelligence",
+    "Machine Learning",
     "Supply Chain Analyst",
     "Project Manager",
     "Project Management",
@@ -47,7 +51,7 @@ export const metadata: Metadata = {
     type: "website",
     title: "Gagah Athallah Fatha",
     description:
-      "Portfolio of Gagah Athallah Fatha — Fullstack Developer, Business Analyst, and Supply Chain Analyst specializing in web development, onchain gaming, and supply chain optimization.",
+      "Portfolio of Gagah Athallah Fatha — Fullstack Developer, Business Analyst, Data Analyst, AI Engineer, and Supply Chain Analyst specializing in web development, AI and data systems, onchain gaming, and supply chain optimization.",
     siteName: "Gagah Athallah Fatha",
     images: [
       {
@@ -62,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Gagah Athallah Fatha",
     description:
-      "Fullstack Developer, Business Analyst, and Supply Chain Analyst focused on building clear, data-driven systems.",
+      "Fullstack Developer, Business Analyst, Data Analyst, AI Engineer, and Supply Chain Analyst focused on building clear, data-driven and AI-enabled systems.",
     images: ["/ITBlack.png"],
   },
   robots: {

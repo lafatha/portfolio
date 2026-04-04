@@ -39,7 +39,7 @@ export default function Hero() {
             </h1>
           </div>
           <span className="hero-subtitle">
-            Fullstack | Business Analyst | Supply Chain Analyst
+            Fullstack | Business Analyst | Data Analyst | Supply Chain Analyst
           </span>
 
           <div className="hero-bio">
@@ -61,7 +61,7 @@ export default function Hero() {
               Experienced in analytics design, system thinking, and building decision-support tools that improve operational clarity.
             </p>
             <p>
-              Interested in leveraging AI and data systems to drive smarter, evidence-based business strategies.
+              Passionate about applying AI and advanced analytics to inform strategic, data-driven business decisions.
             </p>
           </div>
 
