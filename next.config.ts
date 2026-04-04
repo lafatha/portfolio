@@ -1,4 +1,9 @@
 import type { NextConfig } from "next";
+import path from "path";
+import { fileURLToPath } from "url";
+
+/** Absolute app root (avoids Turbopack using a parent folder like the user home as resolve context). */
+const projectDir = path.dirname(fileURLToPath(import.meta.url));
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -20,8 +25,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   turbopack: {
-    // Ensures Next uses this project as the workspace root (avoids picking a parent lockfile).
-    root: __dirname,
+    root: projectDir,
   },
   images: {
     remotePatterns: [

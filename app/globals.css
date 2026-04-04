@@ -1,4 +1,4 @@
-@import "../node_modules/tailwindcss/index.css";
+@import "tailwindcss";
 
 @theme {
   --font-sans: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
