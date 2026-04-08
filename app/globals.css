@@ -249,6 +249,13 @@ h1, h2, h3, h4, h5, h6 {
   cursor: grabbing;
 }
 
+.project-description-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* ===== DARK MODE ===== */
 
 /* Smooth theme transitions */

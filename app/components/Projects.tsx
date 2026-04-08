@@ -5,8 +5,18 @@ import Image from "next/image";
 import { ChevronRight, Link } from "lucide-react";
 
 const projects = [
-  { name: "Narratio AI", url: "#", hasPreview: true, projectKey: "narratioAi" },
-  { name: "Base Realms", url: "#", hasPreview: true, projectKey: "baseRealms" },
+  {
+    name: "Narratio AI",
+    url: "https://narrativoai-sable.vercel.app/",
+    hasPreview: true,
+    projectKey: "narratioAi",
+  },
+  {
+    name: "Base Realms",
+    url: "https://www.baserealms.app/",
+    hasPreview: true,
+    projectKey: "baseRealms",
+  },
   { name: "ERP System", url: "#", hasPreview: true, projectKey: "erpSystem" },
 ];
 
@@ -53,6 +63,9 @@ function paragraphsForProject(projectKey: string): string[] {
 
 export default function Projects() {
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const [expandedDescriptionByProject, setExpandedDescriptionByProject] = useState<
+    Record<string, boolean>
+  >({});
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const isDraggingRef = useRef(false);
@@ -128,62 +141,84 @@ export default function Projects() {
 
               {project.hasPreview && expandedProject === project.projectKey && (
                 <div className="mt-4 mb-4 px-2">
-                  <div
-                    ref={scrollRef}
-                    className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide cursor-grab select-none"
-                    onMouseDown={handleMouseDown}
-                    onMouseLeave={stopDragging}
-                    onMouseUp={stopDragging}
-                    onMouseMove={handleMouseMove}
-                  >
-                    {projectImages[project.projectKey]?.map((image, imgIndex) => (
-                      <div key={imgIndex} className="flex-shrink-0">
-                        <button
-                          type="button"
-                          className="relative w-[210px] aspect-video md:w-[280px] rounded-lg overflow-hidden cursor-pointer"
-                          onClick={() => {
-                            if (hasDraggedRef.current) {
-                              return;
+                  <div className="mt-4 max-w-4xl">
+                    {(() => {
+                      const isDescriptionExpanded = Boolean(
+                        expandedDescriptionByProject[project.projectKey]
+                      );
+                      const fullDescription = paragraphsForProject(project.projectKey).join("\n\n");
+                      return (
+                        <>
+                          <p
+                            className={`text-xs text-neutral-600 leading-relaxed text-justify whitespace-pre-line ${
+                              isDescriptionExpanded ? "" : "project-description-clamp-4"
+                            }`}
+                          >
+                            {fullDescription}
+                          </p>
+                          {project.projectKey !== "erpSystem" && (
+                            <a
+                              href={project.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-3 inline-flex items-center gap-2 text-xs text-neutral-600 hover:text-neutral-900 transition-colors"
+                            >
+                              <Link
+                                size={14}
+                                className="text-neutral-400 group-hover:text-neutral-600 transition-colors"
+                              />
+                              <span>Click here to see the Project</span>
+                            </a>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setExpandedDescriptionByProject((prev) => ({
+                                ...prev,
+                                [project.projectKey]: !isDescriptionExpanded,
+                              }))
                             }
-                            setLightboxImage(image);
-                          }}
-                        >
-                          <Image
-                            src={image}
-                            alt={`${project.name} ${imgIndex + 1}`}
-                            fill
-                            className="object-cover"
-                            draggable={false}
-                            sizes="(min-width: 768px) 280px, 210px"
-                          />
-                        </button>
-                      </div>
-                    ))}
+                            className="mt-2 block text-xs text-blue-500 hover:text-blue-600 transition-colors"
+                          >
+                            {isDescriptionExpanded ? "Show less" : "Show more"}
+                          </button>
+
+                          <div
+                            ref={scrollRef}
+                            className="mt-4 flex gap-4 overflow-x-auto pb-4 scrollbar-hide cursor-grab select-none"
+                            onMouseDown={handleMouseDown}
+                            onMouseLeave={stopDragging}
+                            onMouseUp={stopDragging}
+                            onMouseMove={handleMouseMove}
+                          >
+                            {projectImages[project.projectKey]?.map((image, imgIndex) => (
+                              <div key={imgIndex} className="flex-shrink-0">
+                                <button
+                                  type="button"
+                                  className="relative w-[210px] aspect-video md:w-[280px] rounded-lg overflow-hidden cursor-pointer"
+                                  onClick={() => {
+                                    if (hasDraggedRef.current) {
+                                      return;
+                                    }
+                                    setLightboxImage(image);
+                                  }}
+                                >
+                                  <Image
+                                    src={image}
+                                    alt={`${project.name} ${imgIndex + 1}`}
+                                    fill
+                                    className="object-cover"
+                                    draggable={false}
+                                    sizes="(min-width: 768px) 280px, 210px"
+                                  />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
-                  <div className="mt-4 max-w-4xl space-y-2">
-                    {paragraphsForProject(project.projectKey).map((paragraph, pIndex) => (
-                      <p
-                        key={pIndex}
-                        className="text-xs text-neutral-600 leading-relaxed text-justify"
-                      >
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                  {project.projectKey === "baseRealms" && (
-                    <a
-                      href="https://www.baserealms.app/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 inline-flex items-center gap-2 text-xs text-neutral-600 hover:text-neutral-900 transition-colors"
-                    >
-                      <Link
-                        size={14}
-                        className="text-neutral-400 group-hover:text-neutral-600 transition-colors"
-                      />
-                      <span>Click here to see the Project</span>
-                    </a>
-                  )}
                 </div>
               )}
             </div>
