@@ -167,7 +167,7 @@ export default function Projects() {
                                 size={14}
                                 className="text-neutral-400 group-hover:text-neutral-600 transition-colors"
                               />
-                              <span>Click here to see the Project</span>
+                              <span className="font-semibold">Click here to see the Project</span>
                             </a>
                           )}
                           <button
