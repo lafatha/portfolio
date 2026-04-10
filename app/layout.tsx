@@ -10,10 +10,36 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 const baseUrl = new URL("https://www.gagah.tech");
+const siteName = "Gagah Athallah Fatha";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteName,
+  url: baseUrl.toString(),
+  alternateName: "gagah.tech",
+  jobTitle: "Fullstack Developer",
+  sameAs: [
+    "https://www.linkedin.com/in/gagahfatha/",
+    "https://github.com/gagahfatha",
+    "https://medium.com/@athallahfatha",
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteName,
+  alternateName: "gagah.tech",
+  url: baseUrl.toString(),
+};
 
 export const metadata: Metadata = {
   metadataBase: baseUrl,
-  title: "Gagah Athallah Fatha",
+  title: {
+    default: siteName,
+    template: `%s | ${siteName}`,
+  },
   description:
     "Gagah Athallah Fatha is a Fullstack Developer, Business Analyst, Data Analyst, AI Engineer, and Supply Chain Analyst with expertise in web development, business analysis, data analytics, artificial intelligence, machine learning, and supply chain optimization. Currently studying at Bandung Institute of Technology (ITB), he builds innovative solutions including onchain gaming platforms and enterprise ERP systems.",
   manifest: "/manifest.json",
@@ -49,10 +75,10 @@ export const metadata: Metadata = {
   openGraph: {
     url: baseUrl,
     type: "website",
-    title: "Gagah Athallah Fatha",
+    title: siteName,
     description:
       "Portfolio of Gagah Athallah Fatha — Fullstack Developer, Business Analyst, Data Analyst, AI Engineer, and Supply Chain Analyst specializing in web development, AI and data systems, onchain gaming, and supply chain optimization.",
-    siteName: "Gagah Athallah Fatha",
+    siteName,
     images: [
       {
         url: "/ITBlack.png",
@@ -64,7 +90,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gagah Athallah Fatha",
+    title: siteName,
     description:
       "Fullstack Developer, Business Analyst, Data Analyst, AI Engineer, and Supply Chain Analyst focused on building clear, data-driven and AI-enabled systems.",
     images: ["/ITBlack.png"],
@@ -83,6 +109,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={plusJakartaSans.variable}>
       <body className="font-sans antialiased min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
         {children}
         <Analytics />
         <SpeedInsights />
