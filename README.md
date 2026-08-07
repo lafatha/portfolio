@@ -1,7 +1,7 @@
 ## Personal Portfolio
 
 This repository contains the source code for my personal portfolio site.  
-It is a single–page, content‑focused profile that showcases my background.
+It is a single–page, content‑focused profile that showcases my background. 
 
 ### Tech Stack
 
