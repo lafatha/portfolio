@@ -62,7 +62,11 @@ function paragraphsForProject(projectKey: string): string[] {
 }
 
 export default function Projects() {
-  const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const [openProjects, setOpenProjects] = useState<Record<string, boolean>>({
+    narratioAi: true,
+    baseRealms: true,
+    erpSystem: true,
+  });
   const [expandedDescriptionByProject, setExpandedDescriptionByProject] = useState<
     Record<string, boolean>
   >({});
@@ -117,31 +121,38 @@ export default function Projects() {
           <h2 className="projects-title">Projects</h2>
         </div>
         <div className="projects-list">
-          {projects.map((project, index) => (
-            <div key={index}>
-              <button
-                type="button"
-                onClick={() =>
-                  setExpandedProject(expandedProject === project.projectKey ? null : project.projectKey)
-                }
-                className="project-row group w-full text-left"
-              >
-                <div className="project-row-group">
-                  <ChevronRight
-                    size={18}
+          {projects.map((project, index) => {
+            const isOpen = openProjects[project.projectKey] !== false;
+            return (
+              <div key={index}>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOpenProjects((prev) => ({
+                      ...prev,
+                      [project.projectKey]: !isOpen,
+                    }))
+                  }
+                  className="project-row group w-full text-left"
+                >
+                  <div className="project-row-group">
+                    <ChevronRight
+                      size={18}
+                      className={`text-neutral-400 group-hover:text-neutral-600 transition-transform duration-200 ${
+                        isOpen ? "rotate-90 text-neutral-600" : ""
+                      }`}
+                    />
+                    <span>{project.name}</span>
+                  </div>
+                  <Link
+                    size={14}
                     className="text-neutral-400 group-hover:text-neutral-600 transition-colors"
                   />
-                  <span>{project.name}</span>
-                </div>
-                <Link
-                  size={14}
-                  className="text-neutral-400 group-hover:text-neutral-600 transition-colors"
-                />
-              </button>
+                </button>
 
-              {project.hasPreview && expandedProject === project.projectKey && (
-                <div className="mt-4 mb-4 px-2">
-                  <div className="mt-4 max-w-4xl">
+                {project.hasPreview && isOpen && (
+                  <div className="mt-4 mb-4 px-2">
+                    <div className="mt-4 max-w-4xl">
                     {(() => {
                       const isDescriptionExpanded = Boolean(
                         expandedDescriptionByProject[project.projectKey]
@@ -149,43 +160,9 @@ export default function Projects() {
                       const fullDescription = paragraphsForProject(project.projectKey).join("\n\n");
                       return (
                         <>
-                          <p
-                            className={`text-xs text-neutral-600 leading-relaxed text-justify whitespace-pre-line ${
-                              isDescriptionExpanded ? "" : "project-description-clamp-4"
-                            }`}
-                          >
-                            {fullDescription}
-                          </p>
-                          {project.projectKey !== "erpSystem" && (
-                            <a
-                              href={project.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="mt-3 inline-flex items-center gap-2 text-xs text-neutral-600 hover:text-neutral-900 transition-colors"
-                            >
-                              <Link
-                                size={14}
-                                className="text-neutral-400 group-hover:text-neutral-600 transition-colors"
-                              />
-                              <span className="font-semibold">Click here to see the Project</span>
-                            </a>
-                          )}
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setExpandedDescriptionByProject((prev) => ({
-                                ...prev,
-                                [project.projectKey]: !isDescriptionExpanded,
-                              }))
-                            }
-                            className="mt-2 block text-xs text-blue-500 hover:text-blue-600 transition-colors"
-                          >
-                            {isDescriptionExpanded ? "Show less" : "Show more"}
-                          </button>
-
                           <div
                             ref={scrollRef}
-                            className="mt-4 flex gap-4 overflow-x-auto pb-4 scrollbar-hide cursor-grab select-none"
+                            className="mb-4 flex gap-4 overflow-x-auto pb-4 scrollbar-hide cursor-grab select-none"
                             onMouseDown={handleMouseDown}
                             onMouseLeave={stopDragging}
                             onMouseUp={stopDragging}
@@ -215,6 +192,42 @@ export default function Projects() {
                               </div>
                             ))}
                           </div>
+
+                          <p
+                            className={`text-xs text-neutral-600 leading-relaxed text-justify whitespace-pre-line ${
+                              isDescriptionExpanded ? "" : "project-description-clamp-4"
+                            }`}
+                          >
+                            {fullDescription}
+                          </p>
+
+                          {project.projectKey !== "erpSystem" && (
+                            <a
+                              href={project.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-3 inline-flex items-center gap-2 text-xs text-neutral-600 hover:text-neutral-900 transition-colors"
+                            >
+                              <Link
+                                size={14}
+                                className="text-neutral-400 group-hover:text-neutral-600 transition-colors"
+                              />
+                              <span className="font-semibold">Click here to see the Project</span>
+                            </a>
+                          )}
+
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setExpandedDescriptionByProject((prev) => ({
+                                ...prev,
+                                [project.projectKey]: !isDescriptionExpanded,
+                              }))
+                            }
+                            className="mt-2 block text-xs text-blue-500 hover:text-blue-600 transition-colors"
+                          >
+                            {isDescriptionExpanded ? "Show less" : "Show more"}
+                          </button>
                         </>
                       );
                     })()}
@@ -222,7 +235,8 @@ export default function Projects() {
                 </div>
               )}
             </div>
-          ))}
+          );
+        })}
         </div>
       </section>
 

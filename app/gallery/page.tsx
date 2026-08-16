@@ -48,6 +48,20 @@ export default function GalleryPage() {
                     </p>
                   </div>
                 </div>
+                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 group">
+                  <Image
+                    src="/gallery/foto6.webp"
+                    alt="Gallery photo 6"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 384px, 100vw"
+                  />
+                  <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
+                      {/* Ganti dengan penjelasan singkat foto 6 */}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 

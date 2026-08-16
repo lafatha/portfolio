@@ -7,8 +7,8 @@ const education = [
 export default function Education() {
   return (
     <section className="mb-16">
-      <div className="flex items-center gap-2 mb-6 border-t border-neutral-200 pt-8">
-        <h2 className="text-2xl font-serif font-medium text-neutral-900">
+      <div className="projects-header">
+        <h2 className="projects-title">
           Education
         </h2>
       </div>

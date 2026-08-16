@@ -34,11 +34,8 @@ export default function Navbar() {
   return (
     <nav className="navbar sticky top-0 z-50 -mx-8 md:-mx-12 px-8 md:px-12 py-4 mb-0 -mt-8 md:-mt-8 flex items-center justify-between">
       <div className="flex items-center gap-6 font-medium">
-        <Link href="/" className="navbar-link transition-colors">
-          home
-        </Link>
-        <Link href="/gallery" className="navbar-link transition-colors">
-          gallery
+        <Link href="/" className="navbar-link transition-colors font-semibold tracking-tight">
+          gagah.tech
         </Link>
       </div>
       <span
