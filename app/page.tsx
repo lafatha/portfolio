@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import TabNavigation, { TabType } from "./components/TabNavigation";
 import Education from "./components/Education";
+import Experience from "./components/Experience";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import GitHubActivity from "./components/GitHubActivity";
@@ -26,6 +27,7 @@ export default function Home() {
           {activeTab === "profile" && (
             <>
               <Education />
+              <Experience />
               <Skills />
               <GitHubActivity />
             </>
