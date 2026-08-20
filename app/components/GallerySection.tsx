@@ -5,14 +5,15 @@ import Image from "next/image";
 
 const leftPhotos = [
   { src: "/gallery/foto1.webp", alt: "Gallery photo 1", aspect: "aspect-square" },
-  { src: "/gallery/foto4.webp", alt: "Gallery photo 4", aspect: "aspect-[4/3]" },
-  { src: "/gallery/foto6.webp", alt: "Gallery photo 6", aspect: "aspect-[4/3]" },
+  { src: "/gallery/foto3.webp", alt: "Gallery photo 3", aspect: "aspect-[4/3]" },
+  { src: "/gallery/foto5.webp", alt: "Gallery photo 5", aspect: "aspect-[4/3]" },
 ];
 
 const rightPhotos = [
+  { src: "/gallery/foto7.webp", alt: "Gallery photo 7", aspect: "aspect-square" },
   { src: "/gallery/foto2.webp", alt: "Gallery photo 2", aspect: "aspect-[4/3]" },
-  { src: "/gallery/foto3.webp", alt: "Gallery photo 3", aspect: "aspect-square" },
-  { src: "/gallery/foto5.webp", alt: "Gallery photo 5", aspect: "aspect-[4/3]" },
+  { src: "/gallery/foto4.webp", alt: "Gallery photo 4", aspect: "aspect-[4/3]" },
+  { src: "/gallery/foto6.webp", alt: "Gallery photo 6", aspect: "aspect-[4/3]" },
 ];
 
 export default function GallerySection() {

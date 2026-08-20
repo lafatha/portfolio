@@ -28,60 +28,8 @@ export default function GalleryPage() {
                     priority
                     sizes="(min-width: 768px) 384px, 100vw"
                   />
-                  <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
-                      {/* Ganti dengan penjelasan singkat foto 1 */}
-                    </p>
-                  </div>
                 </div>
                 <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 group">
-                  <Image
-                    src="/gallery/foto4.webp"
-                    alt="Gallery photo 4"
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 768px) 384px, 100vw"
-                  />
-                  <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
-                      {/* Ganti dengan penjelasan singkat foto 4 */}
-                    </p>
-                  </div>
-                </div>
-                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 group">
-                  <Image
-                    src="/gallery/foto6.webp"
-                    alt="Gallery photo 6"
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 768px) 384px, 100vw"
-                  />
-                  <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
-                      {/* Ganti dengan penjelasan singkat foto 6 */}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex-1">
-              <div className="flex flex-col gap-4">
-                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 group">
-                  <Image
-                    src="/gallery/foto2.webp"
-                    alt="Gallery photo 2"
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 768px) 384px, 100vw"
-                  />
-                  <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
-                      {/* Ganti dengan penjelasan singkat foto 2 */}
-                    </p>
-                  </div>
-                </div>
-                <div className="relative w-full aspect-[3/3] rounded-lg overflow-hidden bg-neutral-100 group">
                   <Image
                     src="/gallery/foto3.webp"
                     alt="Gallery photo 3"
@@ -89,11 +37,6 @@ export default function GalleryPage() {
                     className="object-cover"
                     sizes="(min-width: 768px) 384px, 100vw"
                   />
-                  <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
-                      {/* Ganti dengan penjelasan singkat foto 3 */}
-                    </p>
-                  </div>
                 </div>
                 <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 group">
                   <Image
@@ -103,11 +46,47 @@ export default function GalleryPage() {
                     className="object-cover"
                     sizes="(min-width: 768px) 384px, 100vw"
                   />
-                  <div className="absolute inset-0 flex items-end bg-neutral-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <p className="w-full px-3 pb-3 text-xs text-white leading-snug">
-                      {/* Ganti dengan penjelasan singkat foto 5 */}
-                    </p>
-                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-1">
+              <div className="flex flex-col gap-4">
+                <div className="relative w-full aspect-square rounded-lg overflow-hidden bg-neutral-100 group">
+                  <Image
+                    src="/gallery/foto7.webp"
+                    alt="Gallery photo 7"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 384px, 100vw"
+                  />
+                </div>
+                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 group">
+                  <Image
+                    src="/gallery/foto2.webp"
+                    alt="Gallery photo 2"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 384px, 100vw"
+                  />
+                </div>
+                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 group">
+                  <Image
+                    src="/gallery/foto4.webp"
+                    alt="Gallery photo 4"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 384px, 100vw"
+                  />
+                </div>
+                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-neutral-100 group">
+                  <Image
+                    src="/gallery/foto6.webp"
+                    alt="Gallery photo 6"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 384px, 100vw"
+                  />
                 </div>
               </div>
             </div>
@@ -119,4 +98,3 @@ export default function GalleryPage() {
     </main>
   );
 }
-

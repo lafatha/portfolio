@@ -37,12 +37,12 @@ export default function TabNavigation({
             >
               <Icon
                 size={22}
-                className={`transition-all duration-200 ${
+                className={`transition-colors duration-200 ${
                   isActive
-                    ? "text-neutral-900 scale-110"
-                    : "text-neutral-400 hover:text-neutral-700 hover:scale-105"
+                    ? "text-neutral-900"
+                    : "text-neutral-400 hover:text-neutral-700"
                 }`}
-                strokeWidth={isActive ? 2.2 : 1.5}
+                strokeWidth={1.75}
               />
             </button>
           );
