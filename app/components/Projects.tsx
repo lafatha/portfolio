@@ -2,25 +2,38 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { ChevronRight, Link } from "lucide-react";
+import { ChevronRight, Globe } from "lucide-react";
+
+
+
 
 const projects = [
   {
     name: "Narratio AI",
+    date: "April 2026",
     url: "https://narrativoai-sable.vercel.app/",
     hasPreview: true,
     projectKey: "narratioAi",
   },
   {
     name: "Base Realms",
+    date: "January 2026",
     url: "https://www.baserealms.app/",
     hasPreview: true,
     projectKey: "baseRealms",
   },
-  { name: "ERP System", url: "#", hasPreview: true, projectKey: "erpSystem" },
+  {
+    name: "ERP System",
+    date: "December 2025",
+    url: "#",
+    hasPreview: true,
+    projectKey: "erpSystem",
+  },
 ];
 
+
 const narratioAiImages = [
+  "/narratio/0.webp",
   "/narratio/1.webp",
   "/narratio/2.webp",
   "/narratio/3.webp",
@@ -28,6 +41,7 @@ const narratioAiImages = [
   "/narratio/5.webp",
   "/narratio/6.webp",
 ];
+
 
 const baseRealmsImages = [
   "/baserealms/1.webp",
@@ -144,10 +158,11 @@ export default function Projects() {
                     />
                     <span>{project.name}</span>
                   </div>
-                  <Link
-                    size={14}
-                    className="text-neutral-400 group-hover:text-neutral-600 transition-colors"
-                  />
+                  <span className="text-xs text-neutral-400 dark:text-neutral-500 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 font-normal transition-colors">
+                    {project.date}
+                  </span>
+
+
                 </button>
 
                 {project.hasPreview && isOpen && (
@@ -206,15 +221,17 @@ export default function Projects() {
                               href={project.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="mt-3 inline-flex items-center gap-2 text-xs text-neutral-600 hover:text-neutral-900 transition-colors"
+                              className="mt-3 inline-flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
                             >
-                              <Link
+                              <Globe
                                 size={14}
-                                className="text-neutral-400 group-hover:text-neutral-600 transition-colors"
+                                className="shrink-0 text-current transition-colors"
                               />
-                              <span className="font-semibold">Click here to see the Project</span>
+                              <span className="font-normal text-current">Project URL</span>
                             </a>
                           )}
+
+
 
                           <button
                             type="button"
