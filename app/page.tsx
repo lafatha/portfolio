@@ -12,19 +12,40 @@ import GitHubActivity from "./components/GitHubActivity";
 import Posts from "./components/Posts";
 import GallerySection from "./components/GallerySection";
 import Footer from "./components/Footer";
+import ChatPanel from "./components/ChatPanel";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>("profile");
+  const [lastContentTab, setLastContentTab] = useState<TabType>("profile");
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  function handleTabChange(tab: TabType) {
+    if (tab === "chat") {
+      setActiveTab("chat");
+      setIsChatOpen(true);
+    } else {
+      setActiveTab(tab);
+      setLastContentTab(tab);
+      setIsChatOpen(false);
+    }
+  }
+
+  function handleCloseChat() {
+    setIsChatOpen(false);
+    setActiveTab(lastContentTab);
+  }
+
+  const currentDisplayTab = activeTab === "chat" ? lastContentTab : activeTab;
 
   return (
     <main className="min-h-screen flex justify-center">
-      <div className="relative w-full max-w-3xl min-h-screen border-x border-neutral-200 px-8 md:px-12 pt-0 pb-8">
+      <div className="relative w-full max-w-3xl min-h-screen border-x border-neutral-200 dark:border-neutral-800 px-8 md:px-12 pt-0 pb-8">
         <Navbar />
         <Hero />
-        <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+        <TabNavigation activeTab={activeTab} onTabChange={handleTabChange} />
 
         <div className="mt-4 transition-all duration-300">
-          {activeTab === "profile" && (
+          {currentDisplayTab === "profile" && (
             <>
               <Education />
               <Experience />
@@ -33,15 +54,18 @@ export default function Home() {
             </>
           )}
 
-          {activeTab === "portfolio" && <Projects />}
+          {currentDisplayTab === "portfolio" && <Projects />}
 
-          {activeTab === "posts" && <Posts />}
+          {currentDisplayTab === "posts" && <Posts />}
 
-          {activeTab === "gallery" && <GallerySection />}
+          {currentDisplayTab === "gallery" && <GallerySection />}
         </div>
 
         <Footer />
+
+        <ChatPanel isOpen={isChatOpen} onClose={handleCloseChat} />
       </div>
     </main>
   );
 }
+

@@ -4,12 +4,13 @@ import { HiOutlineMail } from "react-icons/hi";
 
 import heroBanner from "@/public/backgr.webp";
 import profilePic from "@/public/profilepic.webp";
+import AsciiBannerOverlay from "./AsciiBannerOverlay";
 
 export default function Hero() {
   return (
     <section className="hero-section">
       <div className="-mx-8 md:-mx-12">
-        <div className="hero-banner">
+        <div className="hero-banner relative">
           <Image
             src={heroBanner}
             alt="Profile banner"
@@ -19,8 +20,10 @@ export default function Hero() {
             placeholder="blur"
             sizes="(min-width: 768px) 768px, 100vw"
           />
+          <AsciiBannerOverlay />
         </div>
       </div>
+
       <div className="hero-inner">
         <div className="hero-avatar">
           <Image
@@ -39,8 +42,9 @@ export default function Hero() {
             </h1>
           </div>
           <span className="hero-subtitle">
-            Fullstack | Business Analyst | Data Analyst | Supply Chain Analyst
+            Business Analyst | Fullstack Developer | Supply Chain Analyst | ITB Graduate
           </span>
+
 
           <div className="hero-bio">
             <p>
