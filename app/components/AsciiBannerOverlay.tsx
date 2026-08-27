@@ -119,10 +119,14 @@ export default function AsciiBannerOverlay() {
         lastTick = time;
 
         ctx.clearRect(0, 0, width, height);
-        ctx.font = "9px monospace";
+
+        // Responsive font size: 6.5px on mobile screens (< 640px) for small, delicate ASCII look matching PC
+        const fontSize = width < 640 ? "6.5px" : "9px";
+        ctx.font = `${fontSize} monospace`;
 
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
+
 
         const cellW = width / cols;
         const startY = 4;

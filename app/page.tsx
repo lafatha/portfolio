@@ -39,7 +39,11 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex justify-center">
-      <div className="relative w-full max-w-3xl min-h-screen border-x border-neutral-200 dark:border-neutral-800 px-8 md:px-12 pt-0 pb-8">
+      <div className="relative w-full max-w-3xl min-h-screen border-x-0 md:border-x border-[#f0f0f0] dark:border-[#242424] px-8 md:px-12 pt-0 pb-8">
+
+
+
+
         <Navbar />
         <Hero />
         <TabNavigation activeTab={activeTab} onTabChange={handleTabChange} />

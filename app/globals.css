@@ -3,7 +3,11 @@
 @theme {
   --font-sans: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --color-neutral-200: #f0f0f0;
+  --color-neutral-300: #e5e5e5;
+  --color-neutral-800: #242424;
 }
+
 
 :root {
   --background: #ffffff;
@@ -108,13 +112,15 @@ h1, h2, h3, h4, h5, h6 {
   flex-shrink: 0;
   border-radius: 1.25rem;
   padding: 0.18rem;
-  background-color: #ffffff;
-  box-shadow: 0 0 0 3px #ffffff;
+  background-color: var(--background);
+  box-shadow: 0 0 0 3px var(--background);
   margin-top: -3rem;
   margin-left: 0;
   margin-right: 0;
   z-index: 20;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
 }
+
 
 
 @media (min-width: 768px) {
@@ -267,8 +273,21 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== DARK MODE ===== */
 
-/* Smooth theme transitions */
+/* Smooth theme transitions for ALL container, border, and chat panel elements */
 body,
+div,
+section,
+header,
+footer,
+nav,
+button,
+span,
+aside,
+input,
+textarea,
+a,
+p,
+h1, h2, h3, h4, h5, h6,
 .navbar,
 .navbar-link,
 .section-title,
@@ -279,14 +298,37 @@ body,
 .skill-badge,
 .projects-title,
 .project-row,
-.project-row-group {
+.project-row-group,
+.chat-panel-container,
+.chat-input-card,
+.chat-bot-bubble,
+.chat-user-bubble,
+.chat-input-field,
+.chat-empty-title,
+.chat-empty-desc,
+.chat-pill-btn,
+.chat-thinking-indicator {
   transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
-/* Navbar — controlled purely via CSS, no Tailwind bg class */
+/* Tab Label Text Smooth Expansion & Theme Transition */
+.tab-label-text {
+  transition: max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin-left 0.3s ease, color 0.25s ease !important;
+}
+
+
+
+
+
+
+/* Seamless Global Border System — Light Mode (#f0f0f0) & Dark Mode (#242424) */
+div, section, header, footer, nav, button, span {
+  border-color: #f0f0f0;
+}
+
 .navbar {
   background-color: #ffffff;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #f0f0f0 !important;
 }
 
 .navbar-link {
@@ -298,9 +340,19 @@ body,
 }
 
 /* Dark mode: navbar matches body background */
+.theme-dark div, 
+.theme-dark section, 
+.theme-dark header, 
+.theme-dark footer, 
+.theme-dark nav, 
+.theme-dark button, 
+.theme-dark span {
+  border-color: #242424;
+}
+
 .theme-dark .navbar {
   background-color: #0f0f0f;
-  border-bottom-color: #3f3f3f;
+  border-bottom: 1px solid #242424 !important;
 }
 
 .theme-dark .navbar-link {
@@ -333,15 +385,8 @@ body,
   opacity: 1;
 }
 
-/* Container & all border-neutral-200 borders */
-.theme-dark .border-neutral-200 {
-  border-color: #3f3f3f !important;
-}
 
-/* Section headers */
-.theme-dark .section-header {
-  border-color: #3f3f3f;
-}
+
 
 .theme-dark .section-title {
   color: #f1f1f1;
@@ -349,9 +394,10 @@ body,
 
 /* Hero */
 .theme-dark .hero-avatar {
-  background-color: #0f0f0f;
-  box-shadow: 0 0 0 3px #0f0f0f;
+  background-color: var(--background);
+  box-shadow: 0 0 0 3px var(--background);
 }
+
 
 .theme-dark .hero-name {
 
@@ -462,29 +508,36 @@ body,
   outline: none !important;
   -webkit-tap-highlight-color: transparent;
   color: #525252;
+  border-bottom-color: transparent !important;
 }
 
 .tab-underline-btn.active-tab {
   color: #000000 !important;
   border-bottom-color: #000000 !important;
+  margin-bottom: -1px;
 }
 
 .theme-dark .tab-underline-btn {
   color: #a3a3a3;
+  border-bottom-color: transparent !important;
 }
 
 .theme-dark .tab-underline-btn.active-tab {
   color: #ffffff !important;
   border-bottom-color: #ffffff !important;
+  margin-bottom: -1px;
 }
+
+
 
 
 /* Chat Panel Theme Styles (Light Mode & Dark Mode) */
 .chat-panel-container {
-  background-color: #ffffff !important;
-  color: #171717 !important;
-  border-left-color: #e5e5e5 !important;
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+  border-left-color: #f0f0f0 !important;
 }
+
 
 .chat-close-btn {
   color: #737373;
@@ -513,11 +566,23 @@ body,
 
 .chat-input-field {
   color: #171717 !important;
+  font-size: 16px !important; /* 16px prevents iOS Safari / mobile auto-zoom on focus */
+}
+
+.chat-empty-title {
+  color: #171717 !important;
+  font-weight: 600 !important;
+}
+
+.chat-empty-desc {
+  color: #525252 !important;
 }
 
 .chat-input-field::placeholder {
   color: #737373 !important;
 }
+
+
 
 .chat-pill-btn {
   background-color: #e5e5e5 !important;
@@ -536,10 +601,11 @@ body,
 
 /* Dark Mode Overrides for Chat Panel */
 .theme-dark .chat-panel-container {
-  background-color: #0f0f0f !important;
-  color: #f1f1f1 !important;
-  border-left-color: #3f3f3f !important;
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+  border-left-color: #242424 !important;
 }
+
 
 .theme-dark .chat-close-btn {
   color: #a3a3a3;
@@ -568,11 +634,22 @@ body,
 
 .theme-dark .chat-input-field {
   color: #f1f1f1 !important;
+  font-size: 16px !important;
+}
+
+
+.theme-dark .chat-empty-title {
+  color: #f1f1f1 !important;
+}
+
+.theme-dark .chat-empty-desc {
+  color: #a3a3a3 !important;
 }
 
 .theme-dark .chat-input-field::placeholder {
   color: #888888 !important;
 }
+
 
 .theme-dark .chat-pill-btn {
   background-color: #2a2a2a !important;

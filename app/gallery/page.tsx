@@ -12,7 +12,11 @@ export const metadata: Metadata = {
 export default function GalleryPage() {
   return (
     <main className="min-h-screen flex justify-center">
-      <div className="w-full max-w-3xl min-h-screen border-x border-neutral-200 px-8 md:px-12 pt-0 pb-8">
+      <div className="w-full max-w-3xl min-h-screen border-x-0 md:border-x border-[#f0f0f0] dark:border-[#242424] px-8 md:px-12 pt-0 pb-8">
+
+
+
+
         <Navbar />
 
         <section className="mt-18">

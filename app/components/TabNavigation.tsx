@@ -23,7 +23,8 @@ export default function TabNavigation({
   ];
 
   return (
-    <div className="-mx-8 md:-mx-12 px-8 md:px-12 border-y border-neutral-200 dark:border-neutral-800 mt-6 mb-6">
+    <div className="-mx-8 md:-mx-12 px-8 md:px-12 border-y border-[#f0f0f0] dark:border-[#242424] mt-6 mb-6">
+
       <div className="grid grid-cols-5 max-w-lg mx-auto">
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -33,32 +34,35 @@ export default function TabNavigation({
               key={tab.id}
               type="button"
               onClick={() => onTabChange(tab.id)}
-              className={`tab-underline-btn relative h-12 flex items-center justify-center cursor-pointer border-b-2 transition-all duration-200 outline-none focus:outline-none select-none ${
+              className={`tab-underline-btn group relative h-12 flex items-center justify-center cursor-pointer border-b-2 transition-colors duration-200 outline-none focus:outline-none select-none ${
                 isActive
-                  ? "active-tab border-neutral-900 dark:border-neutral-100 text-black dark:text-white font-semibold"
-                  : "border-transparent text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white font-normal"
+                  ? "active-tab border-black dark:border-white text-black dark:text-white font-medium"
+                  : "border-transparent text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 font-normal"
               }`}
               title={tab.label}
               aria-label={tab.label}
             >
-
               <div className="flex items-center justify-center">
                 <Icon
                   size={20}
                   strokeWidth={isActive ? 1.75 : 1.4}
-                  className="shrink-0 transition-transform duration-200"
+                  className="shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5"
                 />
                 <span
-                  className={`inline-block overflow-hidden whitespace-nowrap text-sm tracking-tight transition-all duration-300 ease-out ${
+                  className={`tab-label-text inline-block overflow-hidden whitespace-nowrap text-sm tracking-tight ${
                     isActive
-                      ? "max-w-24 opacity-100 ml-2"
+                      ? "max-w-[120px] opacity-100 ml-2"
                       : "max-w-0 opacity-0 ml-0"
                   }`}
                 >
                   {tab.label}
                 </span>
+
+
               </div>
             </button>
+
+
           );
         })}
       </div>

@@ -170,15 +170,16 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
         {/* Chat Messages Body */}
         <div className="flex-1 p-4 overflow-y-auto space-y-3.5 scrollbar-hide">
           {messages.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center p-6 text-neutral-400 dark:text-neutral-500">
-              <p className="text-sm font-medium text-neutral-700 dark:text-neutral-200 mb-1">
+            <div className="h-full flex flex-col items-center justify-center text-center p-6">
+              <p className="chat-empty-title text-sm mb-1">
                 How can I help you?
               </p>
-              <p className="text-xs text-neutral-400 dark:text-neutral-400">
+              <p className="chat-empty-desc text-xs">
                 Ask anything about Gagah&apos;s projects, skills, or background.
               </p>
             </div>
           ) : (
+
             messages.map((msg) => (
               <div
                 key={msg.id}
