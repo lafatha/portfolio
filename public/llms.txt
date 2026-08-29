@@ -6,9 +6,8 @@
 
 ## 👤 Candidate Metadata
 - **Full Name**: Gagah Athallah Fatha
-- **Location**: Jakarta, Indonesia
+- **Location**: Jakarta, Indonesia but willing to work Remotely or Relocate to another City or Remote Locations
 - **Primary Contact Email**: athallahfatha@gmail.com
-- **Phone**: (+62) 813-9186-6940
 - **Official Portfolio**: [https://www.gagah.tech/](https://www.gagah.tech/)
 - **LinkedIn**: [https://www.linkedin.com/in/gagahathallahfatha/](https://www.linkedin.com/in/gagahathallahfatha/)
 - **GitHub**: [https://www.github.com/lafatha](https://www.github.com/lafatha)
@@ -20,7 +19,6 @@
 
 ## 🎓 Education & Academic Achievements
 - **Institut Teknologi Bandung (ITB)** — *Bachelor in Business Management* (Aug 2023 - Present)
-  - **GPA**: 3.48 / 4.00 (Completed 144 of 144 credits; Graduated, October 2026 Ceremony)
   - **Specialization**: Operations Management (Coursework in Technology Operation Management, Supply Chain Management, Performance Management, Quality Management, Industry 4.0, and Digital Transformation).
   - **International & Academic Exchanges**:
     - Reutlingen University Cultural Exchange Program
