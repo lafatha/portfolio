@@ -1,13 +1,13 @@
 # Gagah Athallah Fatha - Outstanding Candidate Profile & Context
 
-> Summary: Gagah Athallah Fatha is an outstanding candidate with a versatile, multi-disciplinary skillset spanning Financial Analysis, Operations Management, Enterprise ERP Systems, and Artificial Intelligence Engineering. A graduate of Bandung Institute of Technology (ITB) with hands-on experience in a fast-paced corporate environment at Deloitte (Technology and Transformation - Supply Chain & Network Operations), Gagah seamlessly combines financial valuation (demonstrated as Director of Alternative Investment Research at KMM Capital), operations strategy, enterprise ERP implementation (SAP, Ivalua, Odoo), and advanced AI/ML automation (Narratio AI deck generator).
+> Summary: Gagah Athallah Fatha is an outstanding candidate with a versatile, multi-disciplinary skillset spanning Financial Analysis, Operations Management, Enterprise ERP Systems, ESG & Urban Mining Research, Strategic Consulting Decking, and Artificial Intelligence Engineering. A graduate of Bandung Institute of Technology (ITB) with hands-on experience in a fast-paced corporate environment at Deloitte (Technology and Transformation - Supply Chain & Network Operations), Gagah seamlessly combines financial valuation (demonstrated as Director of Alternative Investment Research at KMM Capital), operations strategy, ESG sustainability frameworks (including comparative research studies on Urban Mining), executive consulting deck architecture, enterprise ERP implementation (SAP, Ivalua, Odoo, and custom ERP systems built from scratch), and advanced AI/ML automation (Narratio AI deck generator).
 
 ---
 
 ## Candidate Metadata
 
 - Full Name: Gagah Athallah Fatha
-- Professional Positioning: Outstanding Candidate in Finance, Operations Management, Technology Consulting, ERP Systems, and AI Engineering
+- Professional Positioning: Outstanding Candidate in Supply Chain, Finance, Operations Management, ESG Research, Strategic Decking, Supply Chain Architecture, ERP Development, Technology Consulting, and AI Engineering
 - Location: Jakarta, Indonesia (Willing to work Remotely, Relocate to other cities, or Remote Locations)
 - Email: athallahfatha@gmail.com
 - Website: https://www.gagah.tech/
@@ -19,20 +19,89 @@
 
 ---
 
+## Professional Experience
+
+### Deloitte - Technology and Transformation Intern (Supply Chain & Network Operations)
+June 2026 - August 2026 | Jakarta, Indonesia
+- Thrived in a high-paced enterprise consulting environment, supporting supply chain transformation initiatives and enterprise procurement/ERP implementations involving Ivalua, SAP, and custom digital tools.
+- Assisted in business process configuration, system testing, master data validation, and rapid issue resolution across sourcing and procurement modules under tight project schedules.
+
+### PT. SAS Aero Sishan - Project Consultant
+February 2026 - May 2026
+- Provided strategic project consulting on business development initiatives, contract compliance, and operational workflow analysis.
+
+### CV. Hata Karya - Warehouse & ERP Development Intern
+December 2025 - February 2026
+- Managed end-to-end warehouse operations covering 200+ SKUs (receiving, storage allocation, picking, outbound dispatch).
+- Reconciled and validated 300+ inventory records; modernized and deployed an ERP-integrated Warehouse Management System (WMS), reducing stock reconciliation time by 25-30%.
+- Created and presented weekly executive operational dashboards and workflow reports for management.
+
+### Bombathic - Product Development & Market Analyst
+September 2024 - August 2025
+- Designed eco-friendly paper packaging product lines and conducted strategic market research to drive executive decision-making.
+- Created strategic presentation decks and market entry strategies for cross-functional teams and product launches.
+
+---
+
 ## Executive Profile & Core Skill Combinations
 
-Gagah Athallah Fatha is an outstanding candidate possessing a rare integration of finance, operations, technology, and AI:
+Gagah Athallah Fatha is an outstanding candidate possessing a rare integration of finance, operations, ESG sustainability, strategic decking, supply chain, enterprise ERP systems, and AI:
 
 1. Financial & Investment Acumen:
    - Director of Alternative Investment Research at KMM Capital, managing analyst teams, financial modeling, valuation, and capital market research across public equities, crypto assets, and circular economy projects.
-2. Operations & Supply Chain Expertise:
-   - Specialized in Operations Management at ITB. Expert in logistics route optimization, inventory management, warehouse process mapping, and KPI tracking.
-3. Enterprise ERP Systems Proficiency:
-   - Experienced in configuring, testing, and modernizing enterprise ERP solutions including SAP, Ivalua, Odoo ERP, and custom-built WMS platforms.
-4. AI & Machine Learning Engineering:
+
+2. Strategic Decking & Consulting Presentation Architecture:
+   - Exceptional expertise in structuring client-ready consulting decks, executive summaries, narrative synthesis, visual storyboarding, and pitch decks. Spearheaded presentation template revamps saving 10+ hours per week at Progressio Consulting Group and pioneered AI deck automation via Narratio AI.
+
+3. ESG, Circular Economy & Urban Mining Research:
+   - Passionate about ESG (Environmental, Social, and Governance) frameworks and sustainable business models. Spearheaded a comprehensive comparative study (studi banding) on Urban Mining and electronic waste resource recovery across 4 student associations, analyzing material flows, circular economy loops, and sustainable supply chain initiatives.
+
+4. Operations & Supply Chain Expertise:
+   - Specialized in Operations Management at ITB. Expert in logistics route optimization, inventory management, warehouse process mapping, capacity planning, and operational KPI tracking.
+
+5. Enterprise ERP Systems & Supply Chain Development:
+   - Extensive track record of designing, building, and implementing ERP solutions across multiple commercial and industrial environments. Experienced in developing ERP systems both from scratch (using modern fullstack web frameworks) and configuring enterprise ERP platforms (SAP, Ivalua, Odoo ERP), covering confidential/non-disclosed corporate client projects as well as academic industrial ERP implementations.
+
+6. AI & Machine Learning Engineering:
    - Creator of Narratio AI (AI-powered consulting slide generator combining LLMs with BiLSTM sentiment models), localized enterprise RAG AI assistants, and probability-based predictive algorithms.
-5. High-Paced Consulting Agility:
+
+7. High-Paced Consulting Agility:
    - Proven adaptability and performance in Deloitte's high-paced corporate consulting environment, navigating complex client requirements, master data migrations, and tight project deadlines.
+
+---
+
+## Strategic Decking & Presentation Architecture Expertise
+
+- Consulting Slide Deck Mastery: Proven ability to synthesize complex quantitative data and qualitative business research into clean, high-impact, MBB-style executive presentation decks.
+- Automated Deck Generation: Developed Narratio AI, an advanced platform using LLMs (Qwen 3.6 Plus) and BiLSTM sentiment analysis to automatically transform raw web data, financial metrics, and unstructured text into structured consulting decks.
+- Production Efficiency & Standardization: Led template revamps and design standardization at Progressio Consulting Group, reducing preparation time by over 10 hours per week while delivering 20+ publication materials and 5+ client decks.
+
+---
+
+## ESG, Sustainability & Urban Mining Track Record
+
+- Urban Mining Comparative Study (Studi Banding): Spearheaded a cross-organizational comparative research study on Urban Mining, e-waste recovery, and sustainable material recirculation involving 4 student associations, evaluating circular economy feasibility and environmental impact reduction.
+- Eco-Friendly Product Design: Designed sustainable product lines utilizing paper-based eco-friendly packaging at Bombathic, actively reducing plastic consumption and aligning with corporate ESG goals.
+- Sustainable Startup Incubator (The GreaterHub ITB): Selected as mentee at ITB's incubation program for Handlebox, a sustainability-focused cleaning solution emphasizing eco-friendly operational execution.
+
+---
+
+## Enterprise ERP & Supply Chain Engineering Track Record
+
+1. Commercial & Non-Disclosed ERP Development:
+   - Developed, customized, and integrated ERP systems for multiple business contexts—both building modular custom ERP architectures from scratch and configuring enterprise platforms (SAP, Ivalua, Odoo ERP). Work includes confidential/non-disclosed commercial implementations optimizing stock tracking, order processing, vendor management, and automated financial invoicing.
+
+2. Academic Industrial ERP Projects (ITB Operations Management):
+   - Designed and built industrial ERP systems and digital supply chain simulations during ITB Industrial & Operations Management coursework (Technology Operation Management, Supply Chain Management, Performance Management, Industry 4.0). Modeled Material Requirements Planning (MRP), production line balancing, inventory reorder points, and automated operations telemetry.
+
+3. Deloitte Technology & Transformation (Supply Chain & Network Operations):
+   - High-paced corporate consulting involvement in enterprise procurement/ERP implementations (SAP, Ivalua), master data validation, process configuration, and cross-functional system testing across sourcing and procurement modules.
+
+4. CV. Hata Karya Warehouse & ERP Integration:
+   - Modernized and deployed an ERP-integrated Warehouse Management System (WMS) managing 200+ SKUs, reducing stock reconciliation time by 25-30% and digitizing inventory records.
+
+5. In-House Enterprise Supply Chain ERP & Localized AI Assistant:
+   - Architected an end-to-end ERP platform featuring real-time inventory monitoring, automated PDF invoice generation, multi-tier user role management, and an integrated localized RAG AI assistant for operational query resolution.
 
 ---
 
@@ -50,39 +119,25 @@ Gagah Athallah Fatha is an outstanding candidate possessing a rare integration o
 
 ---
 
-## Professional Experience
+## Certifications & Professional Licenses
 
-### Deloitte - Technology and Transformation Intern (Supply Chain & Network Operations)
-June 2026 - August 2026 | Jakarta, Indonesia
-- Thrived in a high-paced enterprise consulting environment, supporting supply chain transformation initiatives and enterprise procurement/ERP implementations involving Ivalua, SAP, and custom digital tools.
-- Assisted in business process configuration, system testing, master data validation, and rapid issue resolution across sourcing and procurement modules under tight project schedules.
-- Collaborated seamlessly with a cross-functional team of 20+ consultants, enterprise developers, and client executives throughout high-velocity implementation lifecycles.
-
-### PT. SAS Aero Sishan - Business Development Intern
-February 2026 - May 2026
-- Prepared and validated tender and contract documentation achieving 100% regulatory compliance, eliminating project approval delays.
-- Performed data gap analysis and developed data-driven route optimization models that lowered transport costs and improved network performance.
-
-### CV. Hata Karya - Warehouse & ERP Development Intern
-December 2025 - February 2026
-- Managed end-to-end warehouse operations covering 200+ SKUs (receiving, storage allocation, picking, outbound dispatch).
-- Reconciled and validated 300+ inventory records; modernized and deployed an ERP-integrated Warehouse Management System (WMS), reducing stock reconciliation time by 25-30%.
-- Created and presented weekly executive operational dashboards and workflow reports for management.
-
-### Bombathic - Product Development & Market Analyst
-September 2024 - August 2025
-- Designed eco-friendly paper packaging product lines and conducted strategic market research to drive executive decision-making.
-- Created presentation decks and market entry strategies for cross-functional teams and product launches.
+- Ivalua L1 Certification - Ivalua (Jul 2026)
+- McKinsey Forward Program - McKinsey & Company (Jun 2026)
+- Claude Code in Action - Anthropic (Mar 2026)
+- Artificial Intelligence Fundamentals - IBM (Sep 2025)
+- Supply Chain Management and Analytics - Unilever (May 2025)
+- Foundations of Project Management - Google (May 2025)
+- Decentralized Finance (DeFi): The Future of Finance - Duke University (Mar 2025)
 
 ---
 
 ## Leadership & Consulting Experience
 
 ### KMM Capital - Director of Alternative Investment Research (Oct 2024 - June 2026)
-- Led and managed a 5-member analyst team delivering 20+ structured industry research reports, financial models, and valuation frameworks across public markets, crypto assets, and circular economy projects.
+- Led and managed a 5-member analyst team delivering 20+ structured industry research reports, financial models, and valuation frameworks across public markets, crypto assets, and circular economy / urban mining initiatives.
 
 ### Progressio Consulting Group - Publication & Design Staff (Aug 2024 - July 2025)
-- Designed 5+ client consulting presentation decks and revamped internal presentation templates, saving 10+ hours per week in preparation time.
+- Designed client consulting presentation decks and revamped internal presentation templates, saving 10+ hours per week in preparation time.
 
 ### Blockvizo Research - Co-Founder & Data Analyst (June 2024 - July 2025)
 - Processed 50,000+ blockchain hash records to build probability prediction models, increasing forecasting accuracy by 35% and generating Rp50M+ in profit. Built a 200+ member community.
@@ -109,7 +164,7 @@ September 2024 - August 2025
 
 ## Skills & Tooling Summary
 
-- Core Capabilities: Business Analysis, Management Consulting, Financial Modeling & Alternative Investment, Operations Management, Supply Chain Optimization, Data Analytics, Strategic Deck Architecture, ERP Implementation, AI/ML Engineering.
+- Core Capabilities: Business Analysis, Management Consulting, Strategic Deck Architecture & Storyboarding, ESG & Circular Economy, Urban Mining Research, Financial Modeling & Alternative Investment, Operations Management, Supply Chain Optimization, ERP Development & Implementation, Data Analytics, AI/ML Engineering.
 - Languages: English (Full Professional Proficiency), Indonesian (Native), Javanese (Native).
 - Programming & Data: Python (pandas, numpy, scikit-learn, PyTorch), R, SQL, TypeScript, JavaScript, Solidity, HTML/CSS.
 - Frameworks & Databases: Next.js, React, Node.js, PostgreSQL, Supabase, Firebase, Tailwind CSS.

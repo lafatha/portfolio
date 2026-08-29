@@ -7,7 +7,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
+        allow: ["/", "/llms.txt", "/llms-full.txt", "/gallery"],
+        disallow: ["/api/"],
       },
       {
         userAgent: [
@@ -18,14 +19,23 @@ export default function robots(): MetadataRoute.Robots {
           "PerplexityBot",
           "Google-Extended",
           "GoogleOther",
-          "CCBot",
+          "Googlebot",
+          "Bingbot",
+          "Amazonbot",
           "Bytespider",
+          "Applebot",
           "Applebot-Extended",
+          "CCBot",
+          "Meta-ExternalAgent",
+          "Cohere-ai",
+          "YouBot",
+          "Diffbot",
         ],
-        allow: "/",
+        allow: ["/", "/llms.txt", "/llms-full.txt", "/gallery"],
+        disallow: ["/api/"],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/llms.txt`],
     host: baseUrl,
   };
 }
