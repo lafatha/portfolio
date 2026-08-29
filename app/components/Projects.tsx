@@ -193,6 +193,7 @@ function ProjectCarousel({
                 className="object-cover"
                 draggable={false}
                 sizes="(min-width: 768px) 280px, 210px"
+                loading={imgIndex === 0 ? "eager" : "lazy"}
               />
             </button>
           </div>

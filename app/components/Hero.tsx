@@ -16,7 +16,8 @@ export default function Hero() {
             fill
             className="hero-banner-image object-cover"
             priority
-            unoptimized
+            quality={95}
+            sizes="(max-width: 768px) 100vw, 768px"
           />
         </div>
       </div>
@@ -28,6 +29,7 @@ export default function Hero() {
             alt="Gagah Athallah Fatha"
             fill
             className="hero-avatar-image object-cover"
+            priority
             placeholder="blur"
             sizes="(min-width: 768px) 112px, 96px"
           />
