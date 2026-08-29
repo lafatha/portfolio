@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -15,6 +16,12 @@ export const viewport: Viewport = {
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-plus-jakarta-sans",
+});
+
+const betaniaPatmos = localFont({
+  src: "./fonts/BetaniaPatmos-Regular.ttf",
+  variable: "--font-betania-patmos",
+  display: "swap",
 });
 
 const baseUrl = new URL("https://www.gagah.tech");
@@ -115,7 +122,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={plusJakartaSans.variable}>
+    <html lang="en" className={`${plusJakartaSans.variable} ${betaniaPatmos.variable}`}>
       <body className="font-sans antialiased min-h-screen">
         <script
           type="application/ld+json"

@@ -11,7 +11,7 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
-    role: "Technology & Transformation",
+    role: "T&T - Supply Chain and Network Operations",
     company: "Deloitte",
     type: "Internship",
     dates: "Jun 2026 - Aug 2026",
@@ -29,7 +29,7 @@ const experiences: ExperienceItem[] = [
     company: "HATA KARYA CV",
     type: "Internship",
     dates: "Dec 2025 - Feb 2026",
-    isGrayBox: true,
+    logo: "/experience/hatakarya.png",
   },
   {
     role: "Research and Data Analyst",

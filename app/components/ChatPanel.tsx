@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { X, ChevronDown, MessageSquare, Loader2 } from "lucide-react";
+import { X, ChevronDown, MessageSquare, Loader2, ArrowRight } from "lucide-react";
 
 interface ChatMessage {
   id: string;
@@ -154,7 +154,7 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
       />
 
       {/* Slide-over Right Chat Panel */}
-      <aside className="chat-panel-container fixed right-0 top-0 bottom-0 z-50 border-l border-neutral-200 dark:border-[#3f3f3f] shadow-2xl transition-all duration-300 ease-in-out flex flex-col w-full md:left-[calc(50%+384px)] md:right-0 md:w-auto min-w-[280px]">
+      <aside className="chat-panel-container fixed right-0 top-0 bottom-0 z-50 border-l border-neutral-200 dark:border-[#3f3f3f] shadow-2xl transition-transform duration-300 ease-in-out flex flex-col w-full md:left-[calc(50%+384px)] md:right-0 md:w-auto min-w-[280px]">
         {/* Header - Clean minimal close button aligned with Navbar */}
         <div className="flex items-center justify-end px-4 md:px-6 h-14 border-b border-neutral-200 dark:border-[#3f3f3f] shrink-0">
           <button
@@ -240,6 +240,25 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
                 <MessageSquare size={12} />
                 <span>Chat</span>
                 <ChevronDown size={12} />
+              </button>
+
+              <button
+                type="button"
+                onClick={handleSend}
+                disabled={!input.trim() || isLoading}
+                className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 ${
+                  input.trim() && !isLoading
+                    ? "chat-send-active hover:scale-105 active:scale-95 cursor-pointer shadow-xs"
+                    : "chat-send-inactive cursor-not-allowed"
+                }`}
+                aria-label="Send message"
+                title="Send message"
+              >
+                {isLoading ? (
+                  <Loader2 size={13} className="animate-spin" />
+                ) : (
+                  <ArrowRight size={14} />
+                )}
               </button>
             </div>
           </div>

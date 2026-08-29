@@ -42,7 +42,7 @@ export default function Skills() {
             key={skill.name}
             className="skill-badge"
           >
-            <skill.icon className="skill-badge-icon" size={16} />
+            <skill.icon className="skill-badge-icon" size={16} aria-hidden="true" />
             <span>{skill.name}</span>
           </div>
         ))}
