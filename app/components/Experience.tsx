@@ -14,7 +14,7 @@ const experiences: ExperienceItem[] = [
     role: "Technology & Transformation",
     company: "Deloitte",
     type: "Internship",
-    dates: "Jun 2026 - Present",
+    dates: "Jun 2026 - Aug 2026",
     logo: "/experience/deloitte.png",
   },
   {

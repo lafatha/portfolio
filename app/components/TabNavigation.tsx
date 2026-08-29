@@ -49,7 +49,7 @@ export default function TabNavigation({
                   className="shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5"
                 />
                 <span
-                  className={`tab-label-text inline-block overflow-hidden whitespace-nowrap text-sm tracking-tight ${
+                  className={`tab-label-text hidden md:inline-block overflow-hidden whitespace-nowrap text-sm tracking-tight ${
                     isActive
                       ? "max-w-[120px] opacity-100 ml-2"
                       : "max-w-0 opacity-0 ml-0"

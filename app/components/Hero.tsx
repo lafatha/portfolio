@@ -4,7 +4,6 @@ import { HiOutlineMail } from "react-icons/hi";
 
 import heroBanner from "@/public/backgr.webp";
 import profilePic from "@/public/profilepic.webp";
-import AsciiBannerOverlay from "./AsciiBannerOverlay";
 
 export default function Hero() {
   return (
@@ -15,12 +14,11 @@ export default function Hero() {
             src={heroBanner}
             alt="Profile banner"
             fill
-            className="object-cover"
+            className="hero-banner-image object-cover"
             priority
             placeholder="blur"
             sizes="(min-width: 768px) 768px, 100vw"
           />
-          <AsciiBannerOverlay />
         </div>
       </div>
 

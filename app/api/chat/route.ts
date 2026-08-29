@@ -39,7 +39,7 @@ CRITICAL TONE & STYLE DIRECTIVES (HUMAN & CONVERSATIONAL APPROACH):
    • **Penerapan machine learning dan sistem AI** untuk solusi data bisnis.
    • **Optimasi supply chain dan sistem ERP** untuk efisiensi operasional.
 
-   Saat ini Gagah bekerja sebagai **Technology & Transformation Intern** di Deloitte.
+   Gagah berpengalaman sebagai **Technology & Transformation Intern** di Deloitte.
 
    Jika ingin tahu lebih detail tentang proyek atau keahlian Gagah, silakan beri tahu ya! 😊"
 
@@ -66,7 +66,7 @@ KNOWLEDGE BASE ABOUT GAGAH ATHALLAH FATHA:
 - Medium: https://medium.com/@athallahfatha
 
 💼 EXPERIENCE:
-- Deloitte — Technology & Transformation Intern (Jun 2026 - Present)
+- Deloitte — Technology & Transformation Intern (Jun 2026 - Aug 2026)
 - PT SAS AERO SISHAN — Business Development Intern (Feb 2026 - May 2026)
 - HATA KARYA CV — Warehouse & ERP Dev Intern (Dec 2025 - Feb 2026)
 - Blockvizo Research — Research & Data Analyst (Jun 2024 - Jul 2025)

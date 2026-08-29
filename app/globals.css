@@ -95,6 +95,11 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #4b5563;
 }
 
+.hero-banner-image {
+  filter: brightness(1.22) contrast(1.05);
+  transition: filter 0.3s ease;
+}
+
 
 
 .hero-inner {
@@ -393,6 +398,10 @@ div, section, header, footer, nav, button, span {
 }
 
 /* Hero */
+.theme-dark .hero-banner-image {
+  filter: brightness(1);
+}
+
 .theme-dark .hero-avatar {
   background-color: var(--background);
   box-shadow: 0 0 0 3px var(--background);
