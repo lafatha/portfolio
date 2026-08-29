@@ -4,11 +4,29 @@ export default function robots(): MetadataRoute.Robots {
   const baseUrl = "https://www.gagah.tech";
 
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+      },
+      {
+        userAgent: [
+          "GPTBot",
+          "ChatGPT-User",
+          "ClaudeBot",
+          "Claude-Web",
+          "PerplexityBot",
+          "Google-Extended",
+          "GoogleOther",
+          "CCBot",
+          "Bytespider",
+          "Applebot-Extended",
+        ],
+        allow: "/",
+      },
+    ],
     sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   };
 }
 
