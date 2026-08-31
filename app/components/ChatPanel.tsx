@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { X, ChevronDown, MessageSquare, Loader2, ArrowRight } from "lucide-react";
+import { X, MessageSquare, Loader2, ArrowRight } from "lucide-react";
 
 interface ChatMessage {
   id: string;
@@ -239,7 +239,6 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
               >
                 <MessageSquare size={12} />
                 <span>Chat</span>
-                <ChevronDown size={12} />
               </button>
 
               <button

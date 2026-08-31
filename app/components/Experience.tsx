@@ -82,7 +82,13 @@ export default function Experience() {
                     {exp.role}
                   </h3>
                   <span className="text-xs text-neutral-600 font-medium">
-                    {exp.company} {exp.type ? `· ${exp.type}` : ""}
+                    {exp.company}
+                    {exp.type && (
+                      <>
+                        <span className="text-neutral-400/50 opacity-60 mx-1 font-normal">|</span>
+                        {exp.type}
+                      </>
+                    )}
                   </span>
                   <span className="text-xs text-neutral-500 font-normal mt-0.5 md:hidden">
                     {exp.dates}

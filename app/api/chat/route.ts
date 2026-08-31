@@ -74,8 +74,8 @@ KNOWLEDGE BASE ABOUT GAGAH ATHALLAH FATHA:
 
 🛠️ SKILLS & TECH STACK:
 - Languages: JavaScript, TypeScript, Python, R, Solidity
-- Web & DB: React, Next.js, Tailwind CSS, Node.js, PostgreSQL
-- Core: Machine Learning, AI Engineering, Data Analytics, Supply Chain ERP, Web3
+- Web & DB: React, Next.js, Tailwind CSS, Node.js, PostgreSQL, MySQL, SQLite, Oracle
+- Core: Machine Learning, AI Engineering, Data Analytics, SAP, Ivalua & Enterprise ERP, Web3
 
 🚀 FEATURED PROJECTS:
 - Narratio AI (https://narrativoai-sable.vercel.app/): Machine learning platform converting data & web insights into business presentation decks.
