@@ -16,8 +16,9 @@ export default function Hero() {
             fill
             className="hero-banner-image object-cover"
             priority
-            quality={95}
-            sizes="(max-width: 768px) 100vw, 768px"
+            quality={100}
+            unoptimized
+            sizes="100vw"
           />
         </div>
       </div>
@@ -30,8 +31,9 @@ export default function Hero() {
             fill
             className="hero-avatar-image object-cover"
             priority
-            placeholder="blur"
-            sizes="(min-width: 768px) 112px, 96px"
+            quality={100}
+            unoptimized
+            sizes="(min-width: 768px) 256px, 192px"
           />
         </div>
         <div className="hero-content">
@@ -41,7 +43,7 @@ export default function Hero() {
             </h1>
           </div>
           <span className="hero-subtitle">
-            Business Analyst | Fullstack Developer | Supply Chain Analyst | ITB Graduate
+            Business Analyst | Supply Chain Analyst | Fullstack Developer | ITB Graduate
           </span>
 
 

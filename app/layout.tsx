@@ -33,7 +33,7 @@ const personSchema = {
   name: siteName,
   url: baseUrl.toString(),
   alternateName: "gagah.tech",
-  jobTitle: "Fullstack Developer",
+  jobTitle: "Business Analyst",
   sameAs: [
     "https://www.linkedin.com/in/gagahfatha/",
     "https://github.com/gagahfatha",
@@ -56,17 +56,17 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description:
-    "Gagah Athallah Fatha is a Fullstack Developer, Business Analyst, Data Analyst, AI Engineer, and Supply Chain Analyst with expertise in web development, business analysis, data analytics, artificial intelligence, machine learning, and supply chain optimization. Currently studying at Bandung Institute of Technology (ITB), he builds innovative solutions including onchain gaming platforms and enterprise ERP systems.",
+    "Gagah Athallah Fatha is a Business Analyst, Supply Chain Analyst, Fullstack Developer, Data Analyst, and AI Engineer with expertise in business analysis, supply chain optimization, web development, data analytics, artificial intelligence, and machine learning. Currently studying at Bandung Institute of Technology (ITB), he builds innovative solutions including onchain gaming platforms and enterprise ERP systems.",
   manifest: "/manifest.json",
   keywords: [
     "Gagah Athallah Fatha",
-    "Fullstack Developer",
     "Business Analyst",
+    "Supply Chain Analyst",
+    "Fullstack Developer",
     "Data Analyst",
     "AI Engineer",
     "Artificial Intelligence",
     "Machine Learning",
-    "Supply Chain Analyst",
     "Project Manager",
     "Project Management",
     "Portfolio",
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
     type: "website",
     title: siteName,
     description:
-      "Portfolio of Gagah Athallah Fatha — Fullstack Developer, Business Analyst, Data Analyst, AI Engineer, and Supply Chain Analyst specializing in web development, AI and data systems, onchain gaming, and supply chain optimization.",
+      "Portfolio of Gagah Athallah Fatha — Business Analyst, Supply Chain Analyst, Fullstack Developer, Data Analyst, and AI Engineer specializing in business analysis, supply chain optimization, web development, AI and data systems, and onchain gaming.",
     siteName,
     images: [
       {
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description:
-      "Fullstack Developer, Business Analyst, Data Analyst, AI Engineer, and Supply Chain Analyst focused on building clear, data-driven and AI-enabled systems.",
+      "Business Analyst, Supply Chain Analyst, Fullstack Developer, Data Analyst, and AI Engineer focused on building clear, data-driven and AI-enabled systems.",
     images: ["/ITBlack.png"],
   },
   robots: {
