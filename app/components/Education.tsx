@@ -4,7 +4,6 @@ interface EducationItem {
   name: string;
   degree?: string;
   major?: string;
-  year: string;
 }
 
 const education: EducationItem[] = [
@@ -12,7 +11,6 @@ const education: EducationItem[] = [
     name: "Bandung Institute of Technology",
     degree: "Management",
     major: "Operations Management (Industrial Operations)",
-    year: "Aug 2023 - Aug 2026",
   },
 ];
 
@@ -65,15 +63,8 @@ export default function Education() {
                       )}
                     </span>
                   )}
-                  <span className="text-xs text-neutral-500 font-normal mt-0.5 md:hidden">
-                    {item.year}
-                  </span>
                 </div>
               </div>
-
-              <span className="hidden md:inline-block text-xs text-neutral-500 shrink-0 text-right font-normal">
-                {item.year}
-              </span>
             </div>
           );
         })}
