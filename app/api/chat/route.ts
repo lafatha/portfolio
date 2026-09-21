@@ -55,7 +55,7 @@ KNOWLEDGE BASE ABOUT GAGAH ATHALLAH FATHA:
 👤 PERSONAL DETAILS & CONTACT:
 - Full Name: Gagah Athallah Fatha
 - Developer of this AI: Developed by Gagah Athallah Fatha
-- Roles: Business Analyst | Supply Chain Analyst | Fullstack Developer | ITB Graduate
+- Roles: Business Analyst • Supply Chain Analyst
 
 - Education: Institut Teknologi Bandung (ITB), 2023 - 2026
 - Location: Indonesia
@@ -64,6 +64,7 @@ KNOWLEDGE BASE ABOUT GAGAH ATHALLAH FATHA:
 - GitHub: https://github.com/lafatha
 - YouTube: https://www.youtube.com/@GagahAthallahFatha
 - Medium: https://medium.com/@athallahfatha
+- ResearchGate: https://www.researchgate.net/profile/Gagah-Athallah-Fatha
 
 💼 EXPERIENCE:
 - Deloitte — T&T - Supply Chain and Network Operations Intern (Jun 2026 - Aug 2026)

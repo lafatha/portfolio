@@ -102,6 +102,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-banner-image {
   filter: brightness(1.22) contrast(1.05);
   transition: filter 0.3s ease;
+  object-position: 50% 78%;
 }
 
 
@@ -166,7 +167,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-subtitle {
   margin-top: 0.2rem;
   margin-bottom: 1.5rem; /* mb-6 */
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.8rem; /* ~13px */
   color: #737373; /* text-neutral-500 */
 }
 
@@ -842,5 +843,26 @@ div, section, header, footer, nav, button, span, a, hr, li, p {
   background-color: rgba(185, 28, 28, 0.1);
   border-color: rgba(239, 68, 68, 0.2);
   color: #f87171;
+}
+
+/* Decorative Side Hatched Pattern */
+.side-hatched-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 6px,
+    rgba(0, 0, 0, 0.03) 6px,
+    rgba(0, 0, 0, 0.03) 7px
+  );
+}
+
+.theme-dark .side-hatched-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 6px,
+    rgba(255, 255, 255, 0.03) 6px,
+    rgba(255, 255, 255, 0.03) 7px
+  );
 }
 

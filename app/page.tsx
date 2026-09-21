@@ -38,7 +38,18 @@ export default function Home() {
   const currentDisplayTab = activeTab === "chat" ? lastContentTab : activeTab;
 
   return (
-    <main className="min-h-screen flex justify-center">
+    <main className="min-h-screen flex justify-center relative overflow-x-hidden">
+      {/* Left side hatched strip */}
+      <div
+        className="hidden md:block absolute top-0 bottom-0 right-[calc(50%+24rem)] w-4 border-l border-[#f0f0f0] dark:border-[#242424] pointer-events-none side-hatched-pattern"
+        aria-hidden="true"
+      />
+      {/* Right side hatched strip */}
+      <div
+        className="hidden md:block absolute top-0 bottom-0 left-[calc(50%+24rem)] w-4 border-r border-[#f0f0f0] dark:border-[#242424] pointer-events-none side-hatched-pattern"
+        aria-hidden="true"
+      />
+
       <div className="relative w-full max-w-3xl min-h-screen border-x-0 md:border-x border-[#f0f0f0] dark:border-[#242424] px-8 md:px-12 pt-0 pb-8">
 
 

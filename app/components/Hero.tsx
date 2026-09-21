@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FaLinkedin, FaGithub, FaMedium, FaYoutube } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaMedium, FaYoutube, FaResearchgate } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 
 import heroBanner from "@/public/backgr.webp";
@@ -43,22 +43,22 @@ export default function Hero() {
             </h1>
           </div>
           <span className="hero-subtitle">
-            Business Analyst | Supply Chain Analyst | Fullstack Developer | ITB Graduate
+            Business Analyst • Supply Chain Analyst
           </span>
 
 
           <div className="hero-bio">
             <p>
               I help organizations translate{" "}
-              <span className="inline-block bg-[#ebebeb] px-1 py-px rounded font-semibold">
+              <span className="font-semibold text-neutral-900">
                 business challenges
               </span>{" "}
               into{" "}
-              <span className="inline-block bg-[#ebebeb] px-1 py-px rounded font-semibold">
+              <span className="font-semibold text-neutral-900">
                 structured data
               </span>{" "}
               and{" "}
-              <span className="inline-block bg-[#ebebeb] px-1 py-px rounded font-semibold">
+              <span className="font-semibold text-neutral-900">
                 technology solutions.
               </span>
             </p>
@@ -82,6 +82,9 @@ export default function Hero() {
             </a>
             <a href="https://medium.com/@athallahfatha" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity" aria-label="Medium Profile" title="Medium Profile">
               <FaMedium size={20} aria-hidden="true" />
+            </a>
+            <a href="https://www.researchgate.net/profile/Gagah-Athallah-Fatha" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity" aria-label="ResearchGate Profile" title="ResearchGate Profile">
+              <FaResearchgate size={20} aria-hidden="true" />
             </a>
             <a href="mailto:athallahfatha@gmail.com" className="hover:opacity-70 transition-opacity" aria-label="Send Email" title="Send Email">
               <HiOutlineMail size={22} aria-hidden="true" />

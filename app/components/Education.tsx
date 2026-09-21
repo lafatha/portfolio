@@ -10,7 +10,7 @@ const education: EducationItem[] = [
   {
     name: "Bandung Institute of Technology",
     degree: "Management",
-    major: "Operations Management (Industrial Operations)",
+    major: "Operations Management",
   },
 ];
 
