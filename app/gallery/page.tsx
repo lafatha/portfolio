@@ -4,9 +4,26 @@ import Footer from "../components/Footer";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Gallery - Gagah Athallah Fatha",
+  title: "Gallery",
   description:
     "A visual gallery from the personal portfolio of Gagah Athallah Fatha, showcasing moments, work, and experiences behind his projects.",
+  alternates: {
+    canonical: "/gallery",
+  },
+  openGraph: {
+    title: "Gallery | Gagah Athallah Fatha",
+    description:
+      "A visual gallery from the personal portfolio of Gagah Athallah Fatha, showcasing moments, work, and experiences behind his projects.",
+    url: "https://www.gagah.tech/gallery",
+    images: [
+      {
+        url: "/gallery/foto1.webp",
+        width: 1200,
+        height: 630,
+        alt: "Gallery of Gagah Athallah Fatha",
+      },
+    ],
+  },
 };
 
 export default function GalleryPage() {

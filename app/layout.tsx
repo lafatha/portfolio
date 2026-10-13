@@ -30,90 +30,187 @@ const siteName = "Gagah Athallah Fatha";
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "https://www.gagah.tech/#person",
   name: siteName,
+  givenName: "Gagah",
+  familyName: "Fatha",
+  additionalName: "Athallah",
+  alternateName: ["Gagah", "Gagah Fatha", "Athallah Fatha", "lafatha", "gagah.tech"],
   url: baseUrl.toString(),
-  alternateName: "gagah.tech",
-  jobTitle: "Business Analyst",
+  image: `${baseUrl.origin}/profilepic.webp`,
+  jobTitle: [
+    "Business Analyst",
+    "Supply Chain Analyst",
+    "Technology and Transformation Consulting Intern",
+    "Data Analyst",
+    "AI Engineer",
+  ],
+  description:
+    "Business Analyst and Supply Chain Analyst specialized in enterprise ERP, operations, technology consulting, and AI systems.",
+  email: "mailto:athallahfatha@gmail.com",
   sameAs: [
-    "https://www.linkedin.com/in/gagahfatha/",
-    "https://github.com/gagahfatha",
+    "https://www.linkedin.com/in/gagahathallahfatha/",
+    "https://github.com/lafatha",
     "https://medium.com/@athallahfatha",
+    "https://www.youtube.com/@GagahAthallahFatha",
+    "https://www.researchgate.net/profile/Gagah-Athallah-Fatha",
+  ],
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Institut Teknologi Bandung",
+    alternateName: "ITB",
+    url: "https://www.itb.ac.id",
+  },
+  knowsAbout: [
+    "Supply Chain Optimization",
+    "Operations Management",
+    "Enterprise Resource Planning (ERP)",
+    "Technology Consulting",
+    "SAP",
+    "Ivalua",
+    "Business Analysis",
+    "Data Analytics",
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Next.js",
+    "TypeScript",
+    "Python",
   ],
 };
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": "https://www.gagah.tech/#website",
   name: siteName,
-  alternateName: "gagah.tech",
+  alternateName: ["gagah.tech", "Gagah Portfolio"],
   url: baseUrl.toString(),
+  description:
+    "Official portfolio and personal website of Gagah Athallah Fatha — Business Analyst, Supply Chain Analyst, Data Analyst, and AI Engineer.",
+  publisher: {
+    "@id": "https://www.gagah.tech/#person",
+  },
+  inLanguage: ["en-US", "id-ID"],
+};
+
+const profilePageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "https://www.gagah.tech/#webpage",
+  url: baseUrl.toString(),
+  name: `${siteName} — Business Analyst & Supply Chain Analyst Portfolio`,
+  isPartOf: {
+    "@id": "https://www.gagah.tech/#website",
+  },
+  mainEntity: {
+    "@id": "https://www.gagah.tech/#person",
+  },
+  inLanguage: "en-US",
 };
 
 export const metadata: Metadata = {
   metadataBase: baseUrl,
   title: {
-    default: siteName,
+    default: `${siteName} — Business Analyst & Supply Chain Analyst`,
     template: `%s | ${siteName}`,
   },
   description:
-    "Gagah Athallah Fatha is a Business Analyst, Supply Chain Analyst, Fullstack Developer, Data Analyst, and AI Engineer with expertise in business analysis, supply chain optimization, web development, data analytics, artificial intelligence, and machine learning. Currently studying at Bandung Institute of Technology (ITB), he builds innovative solutions including onchain gaming platforms and enterprise ERP systems.",
-  manifest: "/manifest.json",
+    "Gagah Athallah Fatha is a Business Analyst, Supply Chain Analyst, Data Analyst, and AI Engineer with expertise in business analysis, supply chain optimization, web development, data analytics, artificial intelligence, and machine learning from Institut Teknologi Bandung (ITB).",
+  applicationName: "Gagah Athallah Fatha Portfolio",
+  authors: [{ name: "Gagah Athallah Fatha", url: baseUrl.toString() }],
+  generator: "Next.js",
   keywords: [
     "Gagah Athallah Fatha",
+    "Gagah",
+    "Gagah Fatha",
+    "Athallah Fatha",
+    "lafatha",
     "Business Analyst",
     "Supply Chain Analyst",
-    "Fullstack Developer",
+    "Technology and Transformation Consulting Intern",
+    "Technology Consulting",
+    "Deloitte Intern",
     "Data Analyst",
     "AI Engineer",
     "Artificial Intelligence",
     "Machine Learning",
-    "Project Manager",
-    "Project Management",
-    "Portfolio",
-    "Web Developer",
-    "Software Engineer",
-    "Software Developer",
+    "Enterprise ERP",
     "ERP System",
     "Supply Chain Management",
+    "Supply Chain Optimization",
+    "Operations Management",
+    "SAP",
+    "Ivalua",
     "Bandung Institute of Technology",
     "Institut Teknologi Bandung",
     "ITB",
-    "Supply chain optimization",
+    "SBM ITB",
+    "Project Manager",
+    "Project Management",
+    "Portfolio",
+    "Software Engineer",
+    "Web Developer",
   ],
+  creator: "Gagah Athallah Fatha",
+  publisher: "Gagah Athallah Fatha",
+  manifest: "/manifest.json",
   icons: {
     icon: "/jadi.svg",
     apple: "/jadi.svg",
   },
   alternates: {
     canonical: "/",
+    languages: {
+      "en-US": "/",
+      "id-ID": "/",
+    },
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
   },
   openGraph: {
-    url: baseUrl,
-    type: "website",
-    title: siteName,
+    url: baseUrl.toString(),
+    type: "profile",
+    title: `${siteName} — Business Analyst & Supply Chain Analyst`,
     description:
-      "Portfolio of Gagah Athallah Fatha — Business Analyst, Supply Chain Analyst, Fullstack Developer, Data Analyst, and AI Engineer specializing in business analysis, supply chain optimization, web development, AI and data systems, and onchain gaming.",
+      "Portfolio of Gagah Athallah Fatha — Business Analyst, Supply Chain Analyst, Data Analyst, and AI Engineer specializing in business analysis, supply chain optimization, web development, AI and data systems, and enterprise solutions.",
     siteName,
+    locale: "en_US",
+    alternateLocale: ["id_ID"],
     images: [
       {
         url: "/ITBlack.png",
         width: 1200,
         height: 630,
-        alt: "Gagah Athallah Fatha",
+        alt: "Gagah Athallah Fatha Portfolio",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteName,
+    title: `${siteName} — Business Analyst & Supply Chain Analyst`,
     description:
-      "Business Analyst, Supply Chain Analyst, Fullstack Developer, Data Analyst, and AI Engineer focused on building clear, data-driven and AI-enabled systems.",
+      "Business Analyst, Supply Chain Analyst, Data Analyst, and AI Engineer focused on building clear, data-driven and AI-enabled systems.",
     images: ["/ITBlack.png"],
+    creator: "@athallahfatha",
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -131,6 +228,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
         />
         {children}
         <Analytics />
