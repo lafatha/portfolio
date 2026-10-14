@@ -98,7 +98,7 @@ const profilePageSchema = {
   "@type": "ProfilePage",
   "@id": "https://www.gagah.tech/#webpage",
   url: baseUrl.toString(),
-  name: `${siteName} — Business Analyst & Supply Chain Analyst Portfolio`,
+  name: `${siteName} - Portfolio`,
   isPartOf: {
     "@id": "https://www.gagah.tech/#website",
   },
@@ -111,7 +111,7 @@ const profilePageSchema = {
 export const metadata: Metadata = {
   metadataBase: baseUrl,
   title: {
-    default: `${siteName} — Business Analyst & Supply Chain Analyst`,
+    default: `${siteName} - Portfolio`,
     template: `%s | ${siteName}`,
   },
   description:
@@ -173,7 +173,7 @@ export const metadata: Metadata = {
   openGraph: {
     url: baseUrl.toString(),
     type: "profile",
-    title: `${siteName} — Business Analyst & Supply Chain Analyst`,
+    title: `${siteName} - Portfolio`,
     description:
       "Portfolio of Gagah Athallah Fatha — Business Analyst, Supply Chain Analyst, Data Analyst, and AI Engineer specializing in business analysis, supply chain optimization, web development, AI and data systems, and enterprise solutions.",
     siteName,
@@ -191,7 +191,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} — Business Analyst & Supply Chain Analyst`,
+    title: `${siteName} - Portfolio`,
     description:
       "Business Analyst, Supply Chain Analyst, Data Analyst, and AI Engineer focused on building clear, data-driven and AI-enabled systems.",
     images: ["/ITBlack.png"],
