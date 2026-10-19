@@ -9,7 +9,7 @@ interface EducationItem {
 const education: EducationItem[] = [
   {
     name: "Bandung Institute of Technology",
-    degree: "Management",
+    degree: "B.Sc. in Management",
     major: "Operations Management",
   },
 ];

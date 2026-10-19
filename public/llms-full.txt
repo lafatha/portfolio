@@ -30,7 +30,8 @@ Specialization: Operations Management
 
 ## Featured Projects
 
-Narratio AI: AI slide generator converting data into consulting decks (https://narrativoai-sable.vercel.app/)
+Internal Intelligence: Enterprise-grade agentic AI platform with reasoning models, real-time web search, interactive artifacts, and live preview (https://chat.gagah.tech/)
+Narratio AI: AI slide generator converting data into consulting decks (https://www.narra.angkasa.tech/)
 Base Realms: Skill-based transparent onchain game on Base network (https://www.baserealms.app/)
 Enterprise Supply Chain ERP: ERP system with inventory tracking, invoicing, and localized AI support
 

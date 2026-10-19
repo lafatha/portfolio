@@ -2,13 +2,20 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { ChevronRight, ChevronLeft, Globe } from "lucide-react";
+import { ChevronRight, ChevronLeft, ChevronDown, ChevronUp, Globe } from "lucide-react";
 
 const projects = [
   {
+    name: "Internal Intelligence",
+    date: "May 2026",
+    url: "https://chat.gagah.tech/",
+    hasPreview: true,
+    projectKey: "internalIntelligence",
+  },
+  {
     name: "Narratio AI",
     date: "April 2026",
-    url: "https://narrativoai-sable.vercel.app/",
+    url: "https://www.narra.angkasa.tech/",
     hasPreview: true,
     projectKey: "narratioAi",
   },
@@ -26,6 +33,14 @@ const projects = [
     hasPreview: true,
     projectKey: "erpSystem",
   },
+];
+
+const internalIntelligenceImages = [
+  "/intelligence/0.png",
+  "/intelligence/3.png",
+  "/intelligence/2.png",
+  "/intelligence/4.png",
+  "/intelligence/1.png",
 ];
 
 const narratioAiImages = [
@@ -49,6 +64,10 @@ const baseRealmsImages = [
 const erpSystemImages = ["/stock/stock.webp"];
 
 const projectDescriptions: { [key: string]: string | string[] } = {
+  internalIntelligence: [
+    "Internal Intelligence is an enterprise-grade agentic AI platform designed as an intelligent operating system and internal knowledge workspace. Built for deep autonomous workflows, it features an agentic architecture equipped with reasoning models, real-time web search capabilities, humanized synthesis, and academic retrieval modes. Users can seamlessly orchestrate multi-step tasks, execute complex problem solving, and configure modular agent settings tailored to diverse enterprise and analytical needs.",
+    "The platform features an integrated interactive artifacts engine, allowing users to generate, edit, and preview live HTML, CSS, JavaScript, and complex Mermaid diagrams in real time alongside conversational outputs. With granular model selection spanning state-of-the-art LLMs (including Claude Opus and DeepSeek V4), token usage telemetry, and secure workspace authentication, Internal Intelligence bridges conversational AI with production-grade development and enterprise intelligence workflows.",
+  ],
   narratioAi: [
     "Narratio AI is a machine learning powered platform designed to help users convert raw data, web insights, and conversations into structured business narratives and consulting style presentation decks. The system combines advanced AI reasoning with classical machine learning models to deliver actionable insights. Large Language Models, such as Qwen 3.6 Plus, are used to generate structured slides that highlight business implications, translate analysis into clear narratives, and maintain a polished consulting style. Users interact via a natural language interface, providing context or data, and the platform transforms it into modular slide components with logical flow, charts, and recommendations, enabling an end to end workflow from research and analysis to presentation-ready outputs.",
     "On the machine learning side, Narratio integrates multiple pipelines to enhance data-driven decision making. Python scripts are used to scrape relevant data from websites, such as news, market reports, and public sources. This unstructured text is processed with a Bidirectional Long Short Term Memory (BiLSTM) model for sentiment analysis, extracting positive, negative, or neutral signals with contextual understanding. These structured sentiment insights are then combined with LLM reasoning to generate slides that reflect market trends, business risks, and strategic recommendations. By merging web scraping, BiLSTM sentiment modeling, and LLM based slide generation, Narratio not only produces visually professional decks but also functions as a machine learning powered business intelligence assistant that supports data-driven consulting decisions.",
@@ -60,6 +79,7 @@ const projectDescriptions: { [key: string]: string | string[] } = {
 };
 
 const projectImages: { [key: string]: string[] } = {
+  internalIntelligence: internalIntelligenceImages,
   narratioAi: narratioAiImages,
   baseRealms: baseRealmsImages,
   erpSystem: erpSystemImages,
@@ -283,41 +303,55 @@ export default function Projects() {
                             />
 
                             <p
-                              className={`text-xs text-neutral-600 leading-relaxed text-justify whitespace-pre-line ${
-                                isDescriptionExpanded ? "" : "project-description-clamp-4"
+                              className={`text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed text-justify whitespace-pre-line ${
+                                isDescriptionExpanded ? "" : "line-clamp-2 project-description-clamp-2"
                               }`}
                             >
                               {fullDescription}
                             </p>
 
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setExpandedDescriptionByProject((prev) => ({
-                                  ...prev,
-                                  [project.projectKey]: !isDescriptionExpanded,
-                                }))
-                              }
-                              className="mt-2 block text-xs text-blue-500 hover:text-blue-600 transition-colors"
-                            >
-                              {isDescriptionExpanded ? "Show less" : "Show more"}
-                            </button>
+                            <div className="mt-2">
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setExpandedDescriptionByProject((prev) => ({
+                                    ...prev,
+                                    [project.projectKey]: !isDescriptionExpanded,
+                                  }))
+                                }
+                                className="inline-flex items-center gap-1 text-xs text-blue-500 hover:text-blue-600 transition-colors cursor-pointer select-none font-medium"
+                              >
+                                {isDescriptionExpanded ? (
+                                  <>
+                                    <ChevronUp size={13} className="shrink-0" />
+                                    <span>Show less</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <ChevronDown size={13} className="shrink-0" />
+                                    <span>Show more</span>
+                                  </>
+                                )}
+                              </button>
+                            </div>
 
                             {project.projectKey !== "erpSystem" && (
-                              <a
-                                href={project.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mt-3 inline-flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
-                              >
-                                <Globe
-                                  size={14}
-                                  className="shrink-0 text-current transition-colors"
-                                />
-                                <span className="font-normal text-current">
-                                  Live Demo
-                                </span>
-                              </a>
+                              <div className="mt-2.5">
+                                <a
+                                  href={project.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
+                                >
+                                  <Globe
+                                    size={14}
+                                    className="shrink-0 text-current transition-colors"
+                                  />
+                                  <span className="font-normal text-current">
+                                    Live Demo
+                                  </span>
+                                </a>
+                              </div>
                             )}
                           </>
                         );

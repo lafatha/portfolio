@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/llms.txt", "/llms-full.txt", "/gallery"],
+        allow: ["/", "/projects", "/posts", "/gallery", "/llms.txt", "/llms-full.txt"],
         disallow: ["/api/"],
       },
       {
@@ -34,7 +34,7 @@ export default function robots(): MetadataRoute.Robots {
           "YouBot",
           "Diffbot",
         ],
-        allow: ["/", "/gallery", "/llms.txt", "/llms-full.txt"],
+        allow: ["/", "/projects", "/posts", "/gallery", "/llms.txt", "/llms-full.txt"],
         disallow: ["/api/"],
       },
     ],
@@ -46,6 +46,3 @@ export default function robots(): MetadataRoute.Robots {
     host: baseUrl,
   };
 }
-
-
-

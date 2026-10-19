@@ -79,7 +79,8 @@ KNOWLEDGE BASE ABOUT GAGAH ATHALLAH FATHA:
 - Core: Machine Learning, AI Engineering, Data Analytics, SAP, Ivalua & Enterprise ERP, Web3
 
 🚀 FEATURED PROJECTS:
-- Narratio AI (https://narrativoai-sable.vercel.app/): Machine learning platform converting data & web insights into business presentation decks.
+- Internal Intelligence (https://chat.gagah.tech/): Enterprise-grade agentic AI platform with reasoning models, real-time web search, interactive artifacts, live code preview, and modular agent controls.
+- Narratio AI (https://www.narra.angkasa.tech/): Machine learning platform converting data & web insights into business presentation decks.
 - Base Realms (https://www.baserealms.app/): Onchain RPG on Base network with ERC-721/1155 and QRIS integration.
 - Supply Chain ERP: Private ERP solution for inventory, transaction tracking, PDF reporting, and internal AI assistant.
 `;

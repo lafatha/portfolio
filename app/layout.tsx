@@ -108,6 +108,41 @@ const profilePageSchema = {
   inLanguage: "en-US",
 };
 
+const siteNavigationSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: [
+    {
+      "@type": "SiteNavigationElement",
+      position: 1,
+      name: "Profile",
+      description: "Profile of Gagah Athallah Fatha, education, experience, and core skills.",
+      url: "https://www.gagah.tech/",
+    },
+    {
+      "@type": "SiteNavigationElement",
+      position: 2,
+      name: "Projects",
+      description: "Explore enterprise ERP systems, AI & machine learning tools, and software projects.",
+      url: "https://www.gagah.tech/projects",
+    },
+    {
+      "@type": "SiteNavigationElement",
+      position: 3,
+      name: "Posts",
+      description: "Read technical articles and insights on business analysis, AI agents, and ERP.",
+      url: "https://www.gagah.tech/posts",
+    },
+    {
+      "@type": "SiteNavigationElement",
+      position: 4,
+      name: "Gallery",
+      description: "Visual gallery of moments, ITB academic journey, and milestones.",
+      url: "https://www.gagah.tech/gallery",
+    },
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: baseUrl,
   title: {
@@ -232,6 +267,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchema) }}
         />
         {children}
         <Analytics />

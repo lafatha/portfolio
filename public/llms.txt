@@ -29,7 +29,8 @@ Blockvizo Research | Co-Founder & Data Analyst | Jun 2024 - Jul 2025
 
 ## Projects
 
-Narratio AI: Presentation deck generator using LLMs and BiLSTM sentiment analysis (https://narrativoai-sable.vercel.app/)
+Internal Intelligence: Enterprise-grade agentic AI platform with reasoning models, interactive artifacts, and live preview (https://chat.gagah.tech/)
+Narratio AI: Presentation deck generator using LLMs and BiLSTM sentiment analysis (https://www.narra.angkasa.tech/)
 Base Realms: Onchain gaming infrastructure on Base network (https://www.baserealms.app/)
 Enterprise Supply Chain ERP: System with stock tracking, invoicing, and localized AI assistant
 

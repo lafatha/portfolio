@@ -43,30 +43,13 @@ export default function Hero() {
             </h1>
           </div>
           <span className="hero-subtitle">
-            Business Analyst • Supply Chain Analyst
+            @gagah
           </span>
 
 
           <div className="hero-bio">
             <p>
-              I help organizations translate{" "}
-              <span className="font-semibold text-neutral-900">
-                business challenges
-              </span>{" "}
-              into{" "}
-              <span className="font-semibold text-neutral-900">
-                structured data
-              </span>{" "}
-              and{" "}
-              <span className="font-semibold text-neutral-900">
-                technology solutions.
-              </span>
-            </p>
-            <p>
-              Experienced in analytics design, system thinking, and building decision-support tools that improve operational clarity.
-            </p>
-            <p>
-              Passionate about applying AI and advanced analytics to inform strategic, data-driven business decisions.
+              I bridge business strategy, data analytics, and technology to solve complex challenges and drive measurable impact. Experienced in translating business needs into analytical frameworks and decision-support systems, with a focus on leveraging AI to optimize decisions and create sustainable value.
             </p>
           </div>
 

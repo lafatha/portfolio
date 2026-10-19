@@ -9,7 +9,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: baseUrl,
       lastModified,
       changeFrequency: "weekly",
-      priority: 1,
+      priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/projects`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/posts`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/gallery`,
@@ -21,16 +33,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/llms.txt`,
       lastModified,
       changeFrequency: "weekly",
-      priority: 0.9,
+      priority: 0.5,
     },
     {
       url: `${baseUrl}/llms-full.txt`,
       lastModified,
       changeFrequency: "weekly",
-      priority: 0.9,
+      priority: 0.5,
     },
   ];
 }
-
-
-

@@ -22,6 +22,7 @@ export default function Navbar() {
       document.documentElement.classList.remove("theme-dark");
     }
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsDark(dark);
     setMounted(true);
   }, []);
