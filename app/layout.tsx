@@ -146,7 +146,7 @@ const siteNavigationSchema = {
 export const metadata: Metadata = {
   metadataBase: baseUrl,
   title: {
-    default: `${siteName} - Portfolio`,
+    default: siteName,
     template: `%s | ${siteName}`,
   },
   description:

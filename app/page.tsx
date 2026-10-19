@@ -3,7 +3,7 @@ import PortfolioShell from "./components/PortfolioShell";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Gagah Athallah Fatha | Business Analyst & AI Engineer",
+    absolute: "Gagah Athallah Fatha",
   },
   description:
     "Official portfolio and profile of Gagah Athallah Fatha — Business Analyst, Supply Chain Analyst, Data Analyst, and AI Engineer from Institut Teknologi Bandung (ITB).",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Gagah Athallah Fatha | Business Analyst & AI Engineer",
+    title: "Gagah Athallah Fatha",
     description:
       "Official portfolio and profile of Gagah Athallah Fatha — Business Analyst, Supply Chain Analyst, Data Analyst, and AI Engineer from Institut Teknologi Bandung (ITB).",
     url: "https://www.gagah.tech",
