@@ -120,6 +120,8 @@ h1, h2, h3, h4, h5, h6 {
   color: #404040; /* text-neutral-700 */
   cursor: default;
   transition: background-color 150ms ease-in-out;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .skill-badge:hover {

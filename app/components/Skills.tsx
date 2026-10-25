@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef } from "react";
 import {
   SiJavascript,
   SiTypescript,
@@ -68,21 +71,73 @@ const skills = [
 ];
 
 export default function Skills() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+
+  function handleMouseDown(e: React.MouseEvent) {
+    if (!scrollRef.current) return;
+    isDraggingRef.current = true;
+    startXRef.current = e.pageX - scrollRef.current.offsetLeft;
+    scrollLeftRef.current = scrollRef.current.scrollLeft;
+  }
+
+  function stopDragging() {
+    isDraggingRef.current = false;
+  }
+
+  function handleMouseMove(e: React.MouseEvent) {
+    if (!isDraggingRef.current || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startXRef.current) * 1.5;
+    scrollRef.current.scrollLeft = scrollLeftRef.current - walk;
+  }
+
+  const mobileRows = [0, 1, 2].map((rowIndex) =>
+    skills.filter((_, index) => index % 3 === rowIndex)
+  );
+
   return (
     <section className="section-spacing">
       <div className="section-header">
         <h2 className="section-title">Tech Stack</h2>
       </div>
-      <div className="skills-grid">
-        {skills.map((skill) => (
-          <div
-            key={skill.name}
-            className="skill-badge"
-          >
-            <skill.icon className="skill-badge-icon" size={16} aria-hidden="true" />
-            <span>{skill.name}</span>
-          </div>
-        ))}
+      <div
+        ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={stopDragging}
+        onMouseUp={stopDragging}
+        onMouseMove={handleMouseMove}
+        className="w-full overflow-x-auto pb-2 scrollbar-hide select-none sm:select-auto cursor-grab active:cursor-grabbing sm:cursor-default sm:overflow-visible sm:pb-0 scroll-smooth"
+      >
+        {/* Mobile: 3 horizontal flex rows so each badge retains its natural content width */}
+        <div className="flex flex-col gap-2.5 w-max sm:hidden">
+          {mobileRows.map((row, rowIndex) => (
+            <div key={rowIndex} className="flex items-center gap-2.5">
+              {row.map((skill) => (
+                <div key={skill.name} className="skill-badge">
+                  <skill.icon className="skill-badge-icon" size={16} aria-hidden="true" />
+                  <span>{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop: standard flex-wrap */}
+        <div className="hidden sm:flex sm:flex-wrap sm:gap-3">
+          {skills.map((skill) => (
+            <div
+              key={skill.name}
+              className="skill-badge"
+            >
+              <skill.icon className="skill-badge-icon" size={16} aria-hidden="true" />
+              <span>{skill.name}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

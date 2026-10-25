@@ -310,7 +310,7 @@ export default function Projects() {
                               {fullDescription}
                             </p>
 
-                            <div className="mt-2">
+                            <div className="mt-2 flex items-center justify-between">
                               <button
                                 type="button"
                                 onClick={() =>
@@ -333,26 +333,23 @@ export default function Projects() {
                                   </>
                                 )}
                               </button>
-                            </div>
 
-                            {project.projectKey !== "erpSystem" && (
-                              <div className="mt-2.5">
+                              {project.projectKey !== "erpSystem" && (
                                 <a
                                   href={project.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
+                                  className="inline-flex items-center text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors"
+                                  title="Live Demo"
+                                  aria-label="Live Demo"
                                 >
                                   <Globe
                                     size={14}
                                     className="shrink-0 text-current transition-colors"
                                   />
-                                  <span className="font-normal text-current">
-                                    Live Demo
-                                  </span>
                                 </a>
-                              </div>
-                            )}
+                              )}
+                            </div>
                           </>
                         );
                       })()}
