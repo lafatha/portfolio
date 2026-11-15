@@ -4,7 +4,7 @@ const REPO_URL = "https://github.com/lafatha/portfolio";
 
 export default function Footer() {
   return (
-    <footer className="mt-12 border-t border-neutral-200 pt-4 text-xs text-neutral-500 flex items-center justify-between">
+    <footer className="mt-12 border-t border-line pt-4 text-xs text-neutral-500 flex items-center justify-between">
       <p>
         This site is available on{" "}
         <a

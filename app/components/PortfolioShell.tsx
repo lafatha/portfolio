@@ -78,15 +78,16 @@ export default function PortfolioShell({ initialTab }: PortfolioShellProps) {
 
   return (
     <main className="min-h-screen flex justify-center relative overflow-x-hidden">
-      <div className="relative w-full max-w-3xl min-h-screen border-x-0 md:border-x border-[#f0f0f0] dark:border-[#242424] px-8 md:px-12 pt-0 pb-8">
+      <div aria-hidden="true" className="bg-dots" />
+      <div className="relative z-10 bg-[var(--background)] w-full max-w-3xl min-h-screen border-x-0 md:border-x border-line px-8 md:px-12 pt-0 pb-8">
         {/* Left side hatched strip */}
         <div
-          className="hidden md:block absolute top-0 bottom-0 right-full w-4 border-l border-[#f0f0f0] dark:border-[#242424] pointer-events-none side-hatched-pattern"
+          className="hidden md:block absolute top-0 bottom-0 right-full w-4 border-x border-line pointer-events-none side-hatched-pattern"
           aria-hidden="true"
         />
         {/* Right side hatched strip */}
         <div
-          className="hidden md:block absolute top-0 bottom-0 left-full w-4 border-r border-[#f0f0f0] dark:border-[#242424] pointer-events-none side-hatched-pattern"
+          className="hidden md:block absolute top-0 bottom-0 left-full w-4 border-x border-line pointer-events-none side-hatched-pattern"
           aria-hidden="true"
         />
 
@@ -97,8 +98,8 @@ export default function PortfolioShell({ initialTab }: PortfolioShellProps) {
         <div className="mt-4">
           {currentDisplayTab === "profile" && (
             <>
-              <Education />
               <Experience />
+              <Education />
               <Skills />
               <GitHubActivity />
             </>

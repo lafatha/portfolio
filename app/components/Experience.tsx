@@ -48,7 +48,7 @@ const experiences: ExperienceItem[] = [
 export default function Experience() {
   return (
     <section className="mb-16">
-      <div className="flex items-center justify-between mb-6 border-t border-neutral-200 pt-8">
+      <div className="projects-header">
         <h2 className="projects-title">Experience</h2>
       </div>
 
@@ -59,7 +59,7 @@ export default function Experience() {
             <div
               key={index}
               className={`flex items-start md:items-center justify-between py-3.5 gap-4 ${
-                isLast ? "" : "border-b border-neutral-200"
+                isLast ? "" : "border-b border-line"
               }`}
             >
               <div className="flex items-start md:items-center gap-3.5 min-w-0">

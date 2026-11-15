@@ -130,7 +130,7 @@ export default function GitHubActivity() {
 
   return (
     <section ref={sectionRef} className="mb-16">
-      <div className="flex items-center gap-2 mb-6 border-t border-neutral-200 pt-8">
+      <div className="flex items-center gap-2 mb-6 border-t border-line pt-8">
         <h2 className="text-2xl font-serif font-medium text-neutral-900">
           Github Stats
         </h2>

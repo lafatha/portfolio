@@ -92,7 +92,7 @@ export default function Posts() {
             target="_blank"
             rel="noopener noreferrer"
             className={`group block py-5 transition-colors ${
-              index === posts.length - 1 ? "" : "border-b border-neutral-200"
+              index === posts.length - 1 ? "" : "border-b border-line"
             }`}
           >
             <div className="flex items-center gap-2 text-xs text-neutral-500 mb-2">

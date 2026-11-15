@@ -154,9 +154,9 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
       />
 
       {/* Slide-over Right Chat Panel */}
-      <aside className="chat-panel-container fixed right-0 top-0 bottom-0 z-50 border-l border-neutral-200 dark:border-[#3f3f3f] shadow-2xl transition-transform duration-300 ease-in-out flex flex-col w-full md:left-[calc(50%+384px)] md:right-0 md:w-auto min-w-[280px]">
+      <aside className="chat-panel-container fixed right-0 top-0 bottom-0 z-50 border-l border-line shadow-2xl transition-transform duration-300 ease-in-out flex flex-col w-full md:left-[calc(50%+384px)] md:right-0 md:w-auto min-w-[280px]">
         {/* Header - Clean minimal close button aligned with Navbar */}
-        <div className="flex items-center justify-end px-4 md:px-6 h-14 border-b border-neutral-200 dark:border-[#3f3f3f] shrink-0">
+        <div className="flex items-center justify-end px-4 md:px-6 h-14 border-b border-line shrink-0">
           <button
             type="button"
             onClick={onClose}
@@ -220,7 +220,7 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
         </div>
 
         {/* Bottom Input Area Card */}
-        <div className="p-4 border-t border-neutral-200/60 dark:border-[#3f3f3f]">
+        <div className="p-4 border-t border-line">
           <div className="chat-input-card rounded-2xl p-3 flex flex-col justify-between gap-3 shadow-xs">
             <input
               type="text"

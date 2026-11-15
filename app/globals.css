@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* `dark:` follows the site toggle (.theme-dark), not the OS setting */
+@custom-variant dark (&:where(.theme-dark, .theme-dark *));
+
 .navbar-logo {
   font-family: var(--font-betania-patmos), serif, cursive;
 }
@@ -10,6 +13,13 @@
   --color-neutral-200: #f0f0f0;
   --color-neutral-300: #e5e5e5;
   --color-neutral-800: #242424;
+  --color-line: #f0f0f0; /* hairline borders: use `border-line` */
+}
+
+@layer base {
+  *, ::before, ::after {
+    border-color: var(--color-line);
+  }
 }
 
 
@@ -20,15 +30,18 @@
   --scrollbar-thumb: #d4d4d8;
   --scrollbar-thumb-hover: #a1a1aa;
   --scrollbar-track: transparent;
+  --dot: #e4e4e7;
 }
 
 .theme-dark {
-  --background: #0f0f0f;
+  --background: #050505;
   --foreground: #f1f1f1;
   --dot-empty: #3a3a3a;
   --scrollbar-thumb: #333336;
   --scrollbar-thumb-hover: #4f4f54;
   --scrollbar-track: transparent;
+  --dot: #1f1f22;
+  --color-line: #242424;
 }
 
 * {
@@ -92,7 +105,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.5rem; /* gap-2 */
   margin-bottom: 1.5rem; /* mb-6 */
-  border-top: 1px solid #e5e5e5; /* border-neutral-200 */
+  border-top: 1px solid var(--color-line);
   padding-top: 2rem; /* pt-8 */
 }
 
@@ -146,13 +159,8 @@ h1, h2, h3, h4, h5, h6 {
   aspect-ratio: 10 / 3; /* 10 width : 3 height */
   border-radius: 0;
   overflow: hidden;
-  background-color: #4b5563;
-}
-
-.hero-banner-image {
-  filter: brightness(1.22) contrast(1.05);
-  transition: filter 0.3s ease;
-  object-position: 50% 78%;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--color-line);
 }
 
 
@@ -349,11 +357,6 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/* Seamless Global Border System — Light Mode (#f0f0f0) & Dark Mode (#242424) */
-div, section, header, footer, nav, button, span, a, hr, li, p {
-  border-color: #f0f0f0;
-}
-
 .navbar {
   background-color: #ffffff;
   border-bottom: 1px solid #f0f0f0 !important;
@@ -367,29 +370,8 @@ div, section, header, footer, nav, button, span, a, hr, li, p {
   color: #171717;
 }
 
-/* Dark mode: global border overrides matching tech stack dividers (#242424) */
-.theme-dark div, 
-.theme-dark section, 
-.theme-dark header, 
-.theme-dark footer, 
-.theme-dark nav, 
-.theme-dark button, 
-.theme-dark span,
-.theme-dark a,
-.theme-dark hr,
-.theme-dark li,
-.theme-dark p {
-  border-color: #242424;
-}
-
-.theme-dark .border-neutral-200,
-.theme-dark .border-neutral-300,
-.theme-dark .border-neutral-400 {
-  border-color: #242424 !important;
-}
-
 .theme-dark .navbar {
-  background-color: #0f0f0f;
+  background-color: var(--background);
   border-bottom: 1px solid #242424 !important;
 }
 
@@ -532,11 +514,6 @@ div, section, header, footer, nav, button, span, a, hr, li, p {
 .theme-dark .hover\:text-neutral-800:hover,
 .theme-dark .hover\:text-neutral-700:hover {
   color: #ffffff !important;
-}
-
-/* Footer */
-.theme-dark footer {
-  border-color: #3f3f3f;
 }
 
 /* Tab Navigation Styles & High Contrast Visibility */
@@ -904,6 +881,7 @@ div, section, header, footer, nav, button, span, a, hr, li, p {
 
 /* Decorative Side Hatched Pattern - Anchored to 0 0 so diagonal lines never shift when container height changes */
 .side-hatched-pattern {
+  background-color: var(--background);
   background-image: linear-gradient(
     45deg,
     rgba(0, 0, 0, 0.03) 25%,
@@ -936,3 +914,13 @@ div, section, header, footer, nav, button, span, a, hr, li, p {
 }
 
 
+
+/* Minimal dotted backdrop: faint grey grid, fading out toward top/bottom */
+.bg-dots {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--dot) 1px, transparent 1.5px) 0 0 / clamp(14px, 1.1vw, 20px) clamp(14px, 1.1vw, 20px);
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, #000 30%, transparent 100%);
+}

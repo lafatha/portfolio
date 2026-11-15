@@ -2,7 +2,8 @@ import Image from "next/image";
 import { FaLinkedin, FaGithub, FaMedium, FaYoutube, FaResearchgate } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 
-import heroBanner from "@/public/backgr.webp";
+import MarsBanner from "./MarsBanner";
+import RocketOrbit from "./RocketOrbit";
 import profilePic from "@/public/profilepic.webp";
 
 export default function Hero() {
@@ -10,16 +11,8 @@ export default function Hero() {
     <section className="hero-section">
       <div className="-mx-8 md:-mx-12">
         <div className="hero-banner relative">
-          <Image
-            src={heroBanner}
-            alt="Profile banner"
-            fill
-            className="hero-banner-image object-cover"
-            priority
-            quality={100}
-            unoptimized
-            sizes="100vw"
-          />
+          <MarsBanner />
+          <RocketOrbit />
         </div>
       </div>
 

@@ -24,7 +24,7 @@ export default function TabNavigation({
   return (
     <nav
       aria-label="Portfolio Sections"
-      className="-mx-8 md:-mx-12 px-8 md:px-12 border-y border-[#f0f0f0] dark:border-[#242424] mt-6 mb-6"
+      className="-mx-8 md:-mx-12 px-8 md:px-12 border-y border-line mt-6 mb-6"
     >
       <div className="grid grid-cols-5 max-w-lg mx-auto">
         {tabs.map((tab) => {
