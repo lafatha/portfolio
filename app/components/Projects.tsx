@@ -6,6 +6,13 @@ import { ChevronRight, ChevronLeft, ChevronDown, ChevronUp, Globe } from "lucide
 
 const projects = [
   {
+    name: "ERPTA",
+    date: "Jun 2026",
+    url: "https://erpta-bxlx.vercel.app/",
+    hasPreview: true,
+    projectKey: "erpta",
+  },
+  {
     name: "Internal Intelligence",
     date: "May 2026",
     url: "https://chat.gagah.tech/",
@@ -61,9 +68,21 @@ const baseRealmsImages = [
   "/baserealms/5.webp",
 ];
 
+const erptaImages = [
+  "/erpta/1.webp",
+  "/erpta/2.webp",
+  "/erpta/3.webp",
+  "/erpta/4.webp",
+  "/erpta/5.webp",
+];
+
 const erpSystemImages = ["/stock/stock.webp"];
 
 const projectDescriptions: { [key: string]: string | string[] } = {
+  erpta: [
+    "ERPTA is an open-source, modular ERP system built for the Industry 4.0 course. It was originally implemented for a real SME client, so every record in the public demo is mock data and no company information is exposed. The core idea of Industry 4.0 here is to connect every part of a business (inventory, purchasing, production, logistics, and people) into one digital system that shares data in real time, so decisions come from live numbers instead of spreadsheets and guesswork.",
+    "The dashboard gives a live overview of monthly revenue, inventory value, active manufacturing orders, open purchase orders, delayed orders, and low-stock alerts, with a forecasting tab and an AI tab on top. The Inventory module tracks items, transactions, warehouses, stock adjustments, transfers, cycle counts, and FIFO or average-cost valuation. Transportation covers fleet management, shipment tracking, and distribution planning, while HR handles employees, attendance, leave, payroll, recruitment, and performance. Every module uses the same filterable, paginated data grids, so a user learns the interface once and works across the whole system.",
+  ],
   internalIntelligence: [
     "Internal Intelligence is an enterprise-grade agentic AI platform designed as an intelligent operating system and internal knowledge workspace. Built for deep autonomous workflows, it features an agentic architecture equipped with reasoning models, real-time web search capabilities, humanized synthesis, and academic retrieval modes. Users can seamlessly orchestrate multi-step tasks, execute complex problem solving, and configure modular agent settings tailored to diverse enterprise and analytical needs.",
     "The platform features an integrated interactive artifacts engine, allowing users to generate, edit, and preview live HTML, CSS, JavaScript, and complex Mermaid diagrams in real time alongside conversational outputs. With granular model selection spanning state-of-the-art LLMs (including Claude Opus and DeepSeek V4), token usage telemetry, and secure workspace authentication, Internal Intelligence bridges conversational AI with production-grade development and enterprise intelligence workflows.",
@@ -79,6 +98,7 @@ const projectDescriptions: { [key: string]: string | string[] } = {
 };
 
 const projectImages: { [key: string]: string[] } = {
+  erpta: erptaImages,
   internalIntelligence: internalIntelligenceImages,
   narratioAi: narratioAiImages,
   baseRealms: baseRealmsImages,
@@ -223,6 +243,50 @@ function ProjectCarousel({
   );
 }
 
+const CLAMP = "project-description-clamp-2";
+
+// Paragraph that animates between a 2-line clamp and its full height.
+function ProjectDescription({ text, expanded }: { text: string; expanded: boolean }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const first = useRef(true);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    const lh = parseFloat(getComputedStyle(el).lineHeight) || 18;
+    const done = () => {
+      el.removeEventListener("transitionend", done);
+      el.style.height = "";
+      el.style.overflow = "";
+      if (!expanded) el.classList.add(CLAMP);
+    };
+    el.style.transition = "none";
+    el.style.overflow = "hidden"; // clip the text while the height animates
+    const from = el.offsetHeight;
+    el.classList.remove(CLAMP);
+    const to = expanded ? el.scrollHeight : lh * 2;
+    el.style.height = `${from}px`;
+    void el.offsetHeight;
+    el.style.transition = "height 300ms ease-out";
+    el.style.height = `${to}px`;
+    el.addEventListener("transitionend", done);
+    return () => el.removeEventListener("transitionend", done);
+  }, [expanded]);
+
+  return (
+    <p
+      ref={ref}
+      className={`text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed text-justify whitespace-pre-line ${CLAMP}`}
+    >
+      {text}
+    </p>
+  );
+}
+
 export default function Projects() {
   const [openProjects, setOpenProjects] = useState<Record<string, boolean>>({
     narratioAi: true,
@@ -283,7 +347,15 @@ export default function Projects() {
                   </span>
                 </button>
 
-                {project.hasPreview && isOpen && (
+                {project.hasPreview && (
+                  <div
+                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                      isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    }`}
+                    aria-hidden={!isOpen}
+                    inert={!isOpen}
+                  >
+                  <div className="overflow-hidden min-h-0">
                   <div className="mt-4 mb-4 px-2">
                     <div className="mt-4 max-w-4xl">
                       {(() => {
@@ -302,13 +374,10 @@ export default function Projects() {
                               onImageClick={(img) => setLightboxImage(img)}
                             />
 
-                            <p
-                              className={`text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed text-justify whitespace-pre-line ${
-                                isDescriptionExpanded ? "" : "line-clamp-2 project-description-clamp-2"
-                              }`}
-                            >
-                              {fullDescription}
-                            </p>
+                            <ProjectDescription
+                              text={fullDescription}
+                              expanded={isDescriptionExpanded}
+                            />
 
                             <div className="mt-2 flex items-center justify-between">
                               <button
@@ -354,6 +423,8 @@ export default function Projects() {
                         );
                       })()}
                     </div>
+                  </div>
+                  </div>
                   </div>
                 )}
               </div>
