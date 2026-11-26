@@ -77,7 +77,7 @@ function rng(seed: number) {
   };
 }
 
-export default function ChatBackdrop() {
+export default function ChatBackdrop({ dim = false }: { dim?: boolean }) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -249,7 +249,9 @@ export default function ChatBackdrop() {
     <canvas
       ref={ref}
       aria-hidden="true"
-      className="absolute inset-0 h-full w-full pointer-events-none opacity-60 dark:opacity-55"
+      className={`absolute inset-0 h-full w-full pointer-events-none transition-opacity duration-700 ${
+        dim ? "opacity-25 dark:opacity-30" : "opacity-60 dark:opacity-55"
+      }`}
       style={{ imageRendering: "pixelated" }}
     />
   );

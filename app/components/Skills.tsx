@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type ComponentType } from "react";
+import { techStack } from "@/app/data/portfolio";
 import {
   SiJavascript,
   SiTypescript,
@@ -51,26 +52,28 @@ function IvaluaIcon({
   );
 }
 
-const skills = [
-  { name: "JavaScript", icon: SiJavascript },
-  { name: "TypeScript", icon: SiTypescript },
-  { name: "Python", icon: SiPython },
-  { name: "R", icon: SiR },
-  { name: "React", icon: SiReact },
-  { name: "Next.js", icon: SiNextdotjs },
-  { name: "Node.js", icon: SiNodedotjs },
-  { name: "Rust", icon: SiRust },
-  { name: "Solidity", icon: SiSolidity },
-  { name: "Tailwind", icon: SiTailwindcss },
-  { name: "Postgre", icon: SiPostgresql },
-  { name: "MySQL", icon: SiMysql },
-  { name: "SQLite", icon: SiSqlite },
-  { name: "Git", icon: SiGit },
-  { name: "SAP", icon: SiSap },
-  { name: "Ivalua", icon: IvaluaIcon },
-  { name: "Oracle", icon: SiOracle },
-  { name: "Docker", icon: SiDocker },
-];
+const icons: Record<string, ComponentType<{ size?: number; className?: string; "aria-hidden"?: boolean | "true" | "false" }>> = {
+  JavaScript: SiJavascript,
+  TypeScript: SiTypescript,
+  Python: SiPython,
+  R: SiR,
+  React: SiReact,
+  "Next.js": SiNextdotjs,
+  "Node.js": SiNodedotjs,
+  Rust: SiRust,
+  Solidity: SiSolidity,
+  Tailwind: SiTailwindcss,
+  Postgre: SiPostgresql,
+  MySQL: SiMysql,
+  SQLite: SiSqlite,
+  Git: SiGit,
+  SAP: SiSap,
+  Ivalua: IvaluaIcon,
+  Oracle: SiOracle,
+  Docker: SiDocker,
+};
+
+const skills = techStack.filter((name) => icons[name]).map((name) => ({ name, icon: icons[name] }));
 
 export default function Skills() {
   const scrollRef = useRef<HTMLDivElement>(null);

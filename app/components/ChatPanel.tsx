@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import ChatBackdrop from "./ChatBackdrop";
-import { X, Mic, Loader2, ArrowRight, ChevronRight } from "lucide-react";
+import { X, Mic, Loader2, ArrowRight, ChevronRight, ChevronDown, Brain } from "lucide-react";
 
 /* Minimal Web Speech API typings (not in TS's DOM lib). Recognition runs in the
    visitor's browser; audio never reaches this site's server. */
@@ -60,10 +60,123 @@ function speak(text: string, fallback: VoiceLang) {
   window.speechSynthesis.speak(u);
 }
 
+interface ThinkStep {
+  label: string;
+  items?: string[];
+  ms: number; // server time since the request started
+}
+
+interface Thinking {
+  steps: ThinkStep[];
+  reasoning: string;
+  startedAt: number; // client clock
+  thoughtMs?: number; // until the first answer token
+  totalMs?: number;
+  model?: string;
+  failed?: boolean;
+}
+
 interface ChatMessage {
   id: string;
   sender: "user" | "bot";
   text: string;
+  thinking?: Thinking;
+}
+
+/** tidy model output for display: no em dashes, en-dash separators become colons */
+function cleanText(text: string) {
+  return text.replace(/\s*(—|--)\s*/g, ", ").replace(/\s+–\s+/g, ": ");
+}
+
+function secs(ms: number) {
+  return `${(ms / 1000).toFixed(ms < 10000 ? 1 : 0)}s`;
+}
+
+/** Claude-style collapsible "Thinking" header with a live timer and the pipeline steps. */
+function ThinkingBlock({ thinking }: { thinking: Thinking }) {
+  const active = thinking.thoughtMs === undefined && !thinking.failed;
+  const [manual, setManual] = useState<boolean | null>(null);
+  const [now, setNow] = useState(() => Date.now());
+  const open = manual ?? false;
+
+  useEffect(() => {
+    if (!active) return;
+    const id = setInterval(() => setNow(Date.now()), 100);
+    return () => clearInterval(id);
+  }, [active]);
+
+  const elapsed = active ? Math.max(0, now - thinking.startedAt) : thinking.thoughtMs ?? thinking.totalMs ?? 0;
+  const title = active ? `Thinking ${secs(elapsed)}` : `Thought for ${secs(elapsed)}`;
+
+  return (
+    <div className="chat-msg-in w-full text-[11px] sm:text-xs">
+      <button
+        type="button"
+        onClick={() => setManual(!open)}
+        aria-expanded={open}
+        className="chat-empty-desc inline-flex items-center gap-1.5 py-1 cursor-pointer transition-opacity hover:opacity-70"
+      >
+        <Brain size={13} aria-hidden="true" className={active ? "animate-pulse" : "opacity-80"} />
+        <span className="font-medium tabular-nums">{title}</span>
+        <ChevronDown
+          size={12}
+          aria-hidden="true"
+          className={`transition-transform duration-300 ease-out ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      {/* grid-rows 0fr -> 1fr animates to the content's real height in both directions */}
+      <div
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+        aria-hidden={!open}
+      >
+        <div className="overflow-hidden">
+          {/* remount on open so the steps cascade in each time */}
+          <div key={open ? "open" : "closed"} className="chat-empty-desc pt-1.5 pb-1 pl-0.5">
+            <ol className="space-y-2">
+              {thinking.steps.map((step, i) => (
+                <li
+                  key={i}
+                  className="thinking-step flex gap-2.5"
+                  style={{ animationDelay: `${Math.min(i, 8) * 45}ms` }}
+                >
+                  <span className="mt-[7px] w-1 h-1 shrink-0 rounded-full bg-current opacity-50" aria-hidden="true" />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span>{step.label}</span>
+                      <span className="shrink-0 tabular-nums opacity-60">{secs(step.ms)}</span>
+                    </div>
+                    {step.items && step.items.length > 0 && (
+                      <p className="mt-0.5 opacity-70">{step.items.join(" · ")}</p>
+                    )}
+                  </div>
+                </li>
+              ))}
+              {active && (
+                <li className="thinking-step flex gap-2.5 opacity-60">
+                  <span className="mt-[7px] w-1 h-1 shrink-0 rounded-full bg-current animate-pulse" aria-hidden="true" />
+                  Working…
+                </li>
+              )}
+            </ol>
+            {thinking.reasoning && (
+              <p className="thinking-step mt-2 pl-3.5 max-h-40 overflow-y-auto whitespace-pre-wrap italic opacity-60 scrollbar-hide">
+                {thinking.reasoning.trim()}
+              </p>
+            )}
+            {thinking.totalMs !== undefined && !thinking.failed && (
+              <p className="thinking-step mt-2 pl-3.5 opacity-50 tabular-nums">
+                Answered in {secs(thinking.totalMs)}
+                {thinking.model ? ` · ${thinking.model}` : ""}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 interface ChatPanelProps {
@@ -71,60 +184,112 @@ interface ChatPanelProps {
   onClose: () => void;
 }
 
+/** Short, readable label for a URL: "https://www.narra.angkasa.tech/" -> "narra.angkasa.tech" */
+function linkLabel(url: string) {
+  try {
+    const u = new URL(url);
+    const path = u.pathname.replace(/\/$/, "");
+    return u.hostname.replace(/^www\./, "") + (path.length > 1 && path.length < 28 ? path : path.length > 1 ? "/…" : "");
+  } catch {
+    return url;
+  }
+}
+
+/** **bold**, [text](url) and bare URLs; trailing punctuation stays outside links */
+function renderInline(text: string, keyBase: string) {
+  const out: React.ReactNode[] = [];
+  const re = /\*\*(.+?)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s)]+[^\s).,!?;:'"])/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  let i = 0;
+  while ((m = re.exec(text))) {
+    if (m.index > last) out.push(text.slice(last, m.index));
+    const key = `${keyBase}-${i++}`;
+    if (m[1] !== undefined) {
+      out.push(
+        <strong key={key} className="font-semibold">
+          {m[1]}
+        </strong>,
+      );
+    } else {
+      const href = m[3] ?? m[4];
+      out.push(
+        <a
+          key={key}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-current/30 underline-offset-2 hover:decoration-current"
+        >
+          {m[2] ?? linkLabel(href)}
+        </a>,
+      );
+    }
+    last = re.lastIndex;
+  }
+  if (last < text.length) out.push(text.slice(last));
+  return out;
+}
+
+/** Light markdown for answers: paragraphs, bullet and numbered lists, inline formatting. */
 function renderFormattedText(text: string) {
-  const lines = text.split("\n");
+  type Block = { kind: "p"; lines: string[] } | { kind: "h"; text: string } | { kind: "ul" | "ol"; items: string[] };
+  const blocks: Block[] = [];
+  for (const raw of text.split("\n")) {
+    const line = raw.trim();
+    const bullet = line.match(/^[-*•]\s+(.*)$/);
+    const numbered = line.match(/^\d+[.)]\s+(.*)$/);
+    const prev = blocks.at(-1);
+    const heading = line.match(/^#{1,6}\s+(.*)$/) ?? line.match(/^\*\*([^*]+)\*\*:?$/);
+    if (heading) {
+      blocks.push({ kind: "h", text: heading[1].replace(/\*\*/g, "") });
+    } else if (!line) {
+      blocks.push({ kind: "p", lines: [] }); // paragraph break
+    } else if (bullet || numbered) {
+      const kind = bullet ? "ul" : "ol";
+      const item = (bullet ?? numbered)![1];
+      if (prev && prev.kind === kind) prev.items.push(item);
+      else blocks.push({ kind, items: [item] });
+    } else if (prev && prev.kind === "p") {
+      prev.lines.push(line);
+    } else {
+      blocks.push({ kind: "p", lines: [line] });
+    }
+  }
 
   return (
-    <div className="space-y-1.5">
-      {lines.map((line, idx) => {
-        const trimmed = line.trim();
-        if (!trimmed) return <div key={idx} className="h-0.5" />;
-
-        const isBullet =
-          trimmed.startsWith("- ") ||
-          trimmed.startsWith("* ") ||
-          trimmed.startsWith("• ");
-
-        let content = trimmed;
-        if (isBullet) {
-          content = trimmed.slice(2);
-        }
-
-        const parts = content.split(/(\*\*.*?\*\*)/g);
-        const parsed = parts.map((part, pIdx) => {
-          if (part.startsWith("**") && part.endsWith("**")) {
-            return (
-              <strong
-                key={pIdx}
-                className="font-semibold text-neutral-900 dark:text-neutral-100"
-              >
-                {part.slice(2, -2)}
-              </strong>
-            );
-          }
-          return part;
-        });
-
-        if (isBullet) {
+    <div className="space-y-3">
+      {blocks.map((block, bi) => {
+        if (block.kind === "h") {
           return (
-            <div key={idx} className="flex items-start gap-2 pl-1">
-              <span className="text-xs text-neutral-400 dark:text-neutral-500 mt-0.5 shrink-0">
-                •
-              </span>
-              <span className="flex-1">{parsed}</span>
-            </div>
+            <p key={bi} className="pt-1 font-semibold">
+              {block.text}
+            </p>
           );
         }
-
+        if (block.kind === "p") {
+          if (block.lines.length === 0) return null;
+          return <p key={bi}>{renderInline(block.lines.join(" "), `p${bi}`)}</p>;
+        }
+        const List = block.kind === "ul" ? "ul" : "ol";
         return (
-          <p key={idx} className="leading-relaxed">
-            {parsed}
-          </p>
+          <List
+            key={bi}
+            className={`space-y-2 pl-5 ${block.kind === "ul" ? "list-disc" : "list-decimal"} marker:text-neutral-400 dark:marker:text-neutral-500`}
+          >
+            {block.items.map((item, ii) => (
+              <li key={ii} className="pl-0.5">
+                {renderInline(item, `l${bi}-${ii}`)}
+              </li>
+            ))}
+          </List>
         );
       })}
     </div>
   );
 }
+
+const BUSY = "Gagah's Chatbot is busy right now. Please try again later.";
 
 const SUGGESTIONS = [
   "Who is Gagah?",
@@ -178,7 +343,8 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
 
   useEffect(() => {
     if (isOpen && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      // jump while tokens stream in (smooth scrolling on every token stutters)
+      messagesEndRef.current.scrollIntoView({ behavior: isLoading ? "auto" : "smooth", block: "end" });
     }
   }, [messages, isLoading, isOpen]);
 
@@ -202,42 +368,83 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
     setInput("");
     setIsLoading(true);
 
+    const botId = (Date.now() + 1).toString();
+    const startedAt = Date.now();
+    setMessages((prev) => [
+      ...prev,
+      { id: botId, sender: "bot", text: "", thinking: { steps: [], reasoning: "", startedAt } },
+    ]);
+    const update = (fn: (m: ChatMessage) => ChatMessage) =>
+      setMessages((prev) => prev.map((m) => (m.id === botId ? fn(m) : m)));
+    const think = (fn: (t: Thinking) => Thinking) => update((m) => ({ ...m, thinking: fn(m.thinking!) }));
+    let answer = "";
+    let failed = false;
+    // ends the thinking timer once; a partial answer is kept as is
+    const fail = (text: string) => {
+      if (failed || answer) return;
+      failed = true;
+      update((m) => ({
+        ...m,
+        text,
+        thinking: { ...m.thinking!, failed: true, totalMs: Date.now() - startedAt },
+      }));
+    };
+
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: newMessages,
+          messages: newMessages.map(({ sender, text }) => ({ sender, text })),
         }),
       });
 
-      const data = await res.json();
-      if (res.ok && data.reply) {
-        const botMsg: ChatMessage = {
-          id: (Date.now() + 1).toString(),
-          sender: "bot",
-          text: data.reply,
-        };
-        setMessages((prev) => [...prev, botMsg]);
-        if (spoken) speak(data.reply, userLang);
-      } else {
-        const fallbackMsg: ChatMessage = {
-          id: (Date.now() + 1).toString(),
-          sender: "bot",
-          text:
-            "I am an AI assistant exclusively dedicated to answering questions about Gagah Athallah Fatha. Please ask me about Gagah's projects, experience, or skills!",
-        };
-        setMessages((prev) => [...prev, fallbackMsg]);
+      if (!res.ok || !res.body) {
+        fail(
+          res.status === 400
+            ? "Sorry, I couldn't read that message. Please try again."
+            : BUSY,
+        );
+        return;
       }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buf = "";
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        let nl: number;
+        while ((nl = buf.indexOf("\n")) >= 0) {
+          const line = buf.slice(0, nl).trim();
+          buf = buf.slice(nl + 1);
+          if (!line) continue;
+          const e = JSON.parse(line);
+          if (e.t === "step") {
+            think((t) => ({ ...t, steps: [...t.steps, { label: e.label, items: e.items, ms: e.ms }] }));
+          } else if (e.t === "reasoning") {
+            think((t) => ({ ...t, reasoning: t.reasoning + e.text }));
+          } else if (e.t === "answer") {
+            const first = answer === "";
+            answer += e.text;
+            const text = answer;
+            update((m) => ({
+              ...m,
+              text,
+              thinking: first ? { ...m.thinking!, thoughtMs: Date.now() - startedAt } : m.thinking,
+            }));
+          } else if (e.t === "done") {
+            think((t) => ({ ...t, totalMs: Date.now() - startedAt, model: e.model }));
+          } else if (e.t === "error") {
+            fail(e.message || BUSY);
+          }
+        }
+      }
+      if (!answer) fail(BUSY);
+      else if (spoken) speak(answer, userLang);
     } catch {
-      const errorMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        sender: "bot",
-        text: "Sorry, I am an AI assistant for Gagah Athallah Fatha. Please try asking again!",
-      };
-      setMessages((prev) => [...prev, errorMsg]);
+      fail("Sorry, I couldn't reach the assistant. Check your connection and try again.");
     } finally {
       setIsLoading(false);
     }
@@ -318,7 +525,7 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
 
       {/* Slide-over Right Chat Panel */}
       <aside className={`chat-panel-container fixed right-0 top-0 bottom-0 z-50 border-l border-line shadow-2xl transition-transform duration-300 ease-in-out motion-reduce:transition-none ${shown ? "translate-x-0" : "translate-x-full pointer-events-none"} flex flex-col w-full md:left-[calc(50%+384px)] md:right-0 md:w-auto min-w-[280px] overflow-hidden`}>
-        <ChatBackdrop />
+        <ChatBackdrop dim={messages.length > 0} />
         {/* Close button only on mobile, where the panel covers the tab bar; on desktop the Chat tab toggles it */}
         <div className="relative z-10 flex md:hidden items-center justify-end px-4 h-14 shrink-0">
           <button
@@ -337,40 +544,24 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
             null
           ) : (
 
-            messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={`flex ${
-                  msg.sender === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
-                <div
-                  className={`max-w-[88%] px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm leading-relaxed ${
-                    msg.sender === "user"
-                      ? "chat-user-bubble rounded-br-xs font-medium"
-                      : "chat-bot-bubble rounded-bl-xs"
-                  }`}
-                >
-                  {msg.sender === "bot"
-                    ? renderFormattedText(msg.text)
-                    : msg.text}
+            messages.map((msg) =>
+              msg.sender === "user" ? (
+                <div key={msg.id} className="chat-msg-in flex justify-end">
+                  <div className="chat-user-bubble max-w-[85%] px-4 py-2.5 rounded-2xl rounded-br-md text-[13.5px] sm:text-sm leading-[1.6] [overflow-wrap:anywhere]">
+                    {msg.text}
+                  </div>
                 </div>
-              </div>
-            ))
-          )}
-
-          {isLoading && (
-            <div className="flex justify-start">
-              <div className="chat-thinking-indicator px-3.5 py-2.5 rounded-2xl text-xs flex items-center gap-2">
-                <Loader2
-                  size={15}
-                  className="animate-spin"
-                />
-                <span className="font-medium">
-                  Thinking...
-                </span>
-              </div>
-            </div>
+              ) : (
+                <div key={msg.id} className="flex flex-col items-start gap-1.5">
+                  {msg.thinking && <ThinkingBlock thinking={msg.thinking} />}
+                  {msg.text && (
+                    <div className="chat-msg-in chat-answer w-full px-0.5 text-[13.5px] sm:text-sm leading-[1.75] [overflow-wrap:anywhere]">
+                      {renderFormattedText(cleanText(msg.text))}
+                    </div>
+                  )}
+                </div>
+              ),
+            )
           )}
 
           <div ref={messagesEndRef} />

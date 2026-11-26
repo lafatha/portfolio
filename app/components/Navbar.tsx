@@ -9,28 +9,40 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
 
+  // Default follows the OS theme (live). Toggling stores an override; toggling back to
+  // what the OS already shows clears it, so the site goes back to following the system.
   useEffect(() => {
-    const stored = window.localStorage.getItem("theme");
-    const prefersDark = window.matchMedia
-      ? window.matchMedia("(prefers-color-scheme: dark)").matches
-      : false;
-    const dark = stored === "dark" || (!stored && prefersDark);
-
-    if (dark) {
-      document.documentElement.classList.add("theme-dark");
-    } else {
-      document.documentElement.classList.remove("theme-dark");
-    }
-
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsDark(dark);
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const stored = () => {
+      try {
+        return window.localStorage.getItem("theme");
+      } catch {
+        return null;
+      }
+    };
+    const apply = () => {
+      const s = stored();
+      const dark = s === "dark" || (s !== "light" && media.matches);
+      document.documentElement.classList.toggle("theme-dark", dark);
+      setIsDark(dark);
+    };
+    apply();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reads the theme only available after mount
     setMounted(true);
+    media.addEventListener("change", apply);
+    return () => media.removeEventListener("change", apply);
   }, []);
 
   function toggleTheme() {
     const next = !isDark;
     document.documentElement.classList.toggle("theme-dark", next);
-    window.localStorage.setItem("theme", next ? "dark" : "light");
+    try {
+      const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (next === systemDark) window.localStorage.removeItem("theme");
+      else window.localStorage.setItem("theme", next ? "dark" : "light");
+    } catch {
+      /* storage unavailable: the toggle still works for this visit */
+    }
     setIsDark(next);
     setIsRotating(true);
     setTimeout(() => setIsRotating(false), 400);

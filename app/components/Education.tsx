@@ -1,18 +1,7 @@
 import Image from "next/image";
+import { education } from "@/app/data/portfolio";
 
-interface EducationItem {
-  name: string;
-  degree?: string;
-  major?: string;
-}
 
-const education: EducationItem[] = [
-  {
-    name: "Bandung Institute of Technology",
-    degree: "B.Sc. in Management",
-    major: "Operations Management",
-  },
-];
 
 export default function Education() {
   return (

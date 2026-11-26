@@ -1,49 +1,7 @@
 import Image from "next/image";
+import { experiences } from "@/app/data/portfolio";
 
-interface ExperienceItem {
-  role: string;
-  company: string;
-  type?: string;
-  dates: string;
-  logo?: string | null;
-  isGrayBox?: boolean;
-}
 
-const experiences: ExperienceItem[] = [
-  {
-    role: "T&T - Supply Chain and Network Operations",
-    company: "Deloitte",
-    type: "Internship",
-    dates: "Jun 2026 - Aug 2026",
-    logo: "/experience/deloitte.png",
-  },
-  {
-    role: "Business Development",
-    company: "PT SAS AERO SISHAN",
-    type: "Internship",
-    dates: "Feb 2026 - May 2026",
-    logo: "/experience/sas.png",
-  },
-  {
-    role: "Warehouse & ERP Development",
-    company: "HATA KARYA CV",
-    type: "Internship",
-    dates: "Dec 2025 - Feb 2026",
-    logo: "/experience/hatakarya.png",
-  },
-  {
-    role: "Research and Data Analyst",
-    company: "Blockvizo Research",
-    dates: "Jun 2024 - Jul 2025",
-    logo: "/experience/blockvizo.png",
-  },
-  {
-    role: "Startup Mentee",
-    company: "The GreaterHub",
-    dates: "Sep 2023 - Dec 2023",
-    logo: "/experience/greaterhub.png",
-  },
-];
 
 export default function Experience() {
   return (

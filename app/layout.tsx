@@ -254,7 +254,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${plusJakartaSans.variable} ${betaniaPatmos.variable}`}>
+    <html lang="en" className={`${plusJakartaSans.variable} ${betaniaPatmos.variable}`} suppressHydrationWarning>
+      <head>
+        {/* set the theme before first paint (system by default, saved override wins) so there's no flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme");if(t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("theme-dark")}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased min-h-screen">
         <script
           type="application/ld+json"
