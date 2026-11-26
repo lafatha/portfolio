@@ -127,7 +127,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.5rem; /* gap-2 */
   border: 1px dashed #d4d4d4; /* border-neutral-300 */
-  border-radius: 0.5rem; /* rounded-lg */
+  border-radius: 0;
   padding: 0.5rem 0.75rem; /* py-2 px-3 */
   font-size: 0.875rem; /* text-sm */
   color: #404040; /* text-neutral-700 */
@@ -558,7 +558,14 @@ h1, h2, h3, h4, h5, h6 {
 .chat-send-active,
 .chat-send-inactive,
 .chat-thinking-indicator {
-  transition: background-color 0s, color 0s, border-color 0s !important;
+  /* colours switch instantly on theme toggle; movement still animates */
+  transition: background-color 0s, color 0s, border-color 0s, transform 300ms ease-in-out, translate 300ms ease-in-out, scale 200ms ease, opacity 200ms ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-panel-container {
+    transition: none !important;
+  }
 }
 
 .chat-panel-container {
@@ -916,11 +923,3 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* Minimal dotted backdrop: faint grey grid, fading out toward top/bottom */
-.bg-dots {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(circle, var(--dot) 1px, transparent 1.5px) 0 0 / clamp(14px, 1.1vw, 20px) clamp(14px, 1.1vw, 20px);
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, #000 30%, transparent 100%);
-}

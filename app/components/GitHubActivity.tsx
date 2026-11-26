@@ -15,6 +15,28 @@ interface ContributionData {
   contributions: Array<ContributionDay>;
 }
 
+const DAYS = 365;
+
+function toKey(d: Date) {
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
+/** The last 365 calendar days, oldest first, ending today (local time). */
+function buildYear() {
+  const today = new Date();
+  return Array.from({ length: DAYS }, (_, i) => {
+    const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (DAYS - 1 - i));
+    return toKey(d);
+  });
+}
+
+function parseKey(key: string) {
+  const [y, m, d] = key.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
 export default function GitHubActivity() {
   const [contributionData, setContributionData] = useState<ContributionDay[]>([]);
   const [totalContributions, setTotalContributions] = useState<number>(0);
@@ -84,25 +106,14 @@ export default function GitHubActivity() {
           }
         }
 
-        // Take the last 364 days (52 weeks * 7 days)
-        const last364 = allContributions.slice(-364);
-        
-        // Ensure we have exactly 364 days, pad with empty days if needed
-        while (last364.length < 364) {
-          last364.unshift({ date: "", count: 0, level: 0 });
-        }
-
-        setContributionData(last364.slice(0, 364));
-        
-        // Calculate total contributions for the displayed period
-        const total = last364.slice(0, 364).reduce((acc, day) => acc + day.count, 0);
-        setTotalContributions(total);
+        const byDate = new Map(allContributions.map((d) => [d.date, d]));
+        const year = buildYear().map((date) => byDate.get(date) ?? { date, count: 0, level: 0 });
+        setContributionData(year);
+        setTotalContributions(year.reduce((acc, day) => acc + day.count, 0));
       } catch (error) {
         console.error("Error fetching GitHub contributions:", error);
         // Fallback to empty grid on error
-        setContributionData(
-          Array.from({ length: 364 }, () => ({ date: "", count: 0, level: 0 }))
-        );
+        setContributionData(buildYear().map((date) => ({ date, count: 0, level: 0 })));
       } finally {
         setLoading(false);
       }
@@ -110,6 +121,13 @@ export default function GitHubActivity() {
 
     fetchContributions();
   }, [shouldFetch]);
+
+  const days = buildYear();
+  const cells = loading || contributionData.length === 0
+    ? days.map((date) => ({ date, count: 0, level: 0 }))
+    : contributionData;
+  const lead = parseKey(days[0]).getDay(); // empty slots so day 1 sits on its weekday row
+  const weeks = Math.ceil((lead + DAYS) / 7);
 
   const getPromptColor = (level: number) => {
     switch (level) {
@@ -138,34 +156,38 @@ export default function GitHubActivity() {
 
       <div className="flex flex-col gap-2">
         <div className="w-full overflow-x-auto pb-2 scrollbar-hide">
-          <div className="grid grid-rows-[repeat(7,minmax(0,1fr))] grid-flow-col gap-0.5 min-w-fit">
-            {loading
-              ? Array.from({ length: 364 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-2.5 h-2.5 rounded-sm gh-dot-empty animate-pulse"
-                  />
-                ))
-              : contributionData.map((day, i) => (
-                  <div
-                    key={i}
-                    title={`${day.date}: ${day.count} contributions`}
-                    className={`w-2.5 h-2.5 rounded-sm ${getPromptColor(day.level)}`}
-                  />
-                ))}
+          <div className="min-w-[520px]">
+            <div
+              className="grid grid-flow-col gap-[3px]"
+              style={{
+                gridTemplateRows: "repeat(7, auto)",
+                gridTemplateColumns: `repeat(${weeks}, minmax(0, 1fr))`,
+              }}
+            >
+              {Array.from({ length: lead }).map((_, i) => (
+                <div key={`pad-${i}`} className="aspect-square" />
+              ))}
+              {cells.map((day, i) => (
+                <div
+                  key={day.date || i}
+                  title={loading ? undefined : `${day.date}: ${day.count} contributions`}
+                  className={`aspect-square ${loading ? "gh-dot-empty animate-pulse" : getPromptColor(day.level)}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
         <div className="flex items-center justify-between mt-2 text-sm text-neutral-600">
-          <span>{totalContributions} contributions in {new Date().getFullYear()}</span>
+          <span>{totalContributions} contributions in the last year</span>
           <div className="flex items-center gap-2 text-xs">
             <span>Less</span>
             <div className="flex gap-1">
-              <div className="w-3 h-3 rounded-sm gh-dot-empty"></div>
-              <div className="w-3 h-3 rounded-sm bg-green-700"></div>
-              <div className="w-3 h-3 rounded-sm bg-green-600"></div>
-              <div className="w-3 h-3 rounded-sm bg-green-500"></div>
-              <div className="w-3 h-3 rounded-sm bg-green-400"></div>
+              <div className="w-3 h-3 gh-dot-empty"></div>
+              <div className="w-3 h-3 bg-green-700"></div>
+              <div className="w-3 h-3 bg-green-600"></div>
+              <div className="w-3 h-3 bg-green-500"></div>
+              <div className="w-3 h-3 bg-green-400"></div>
             </div>
             <span>More</span>
           </div>

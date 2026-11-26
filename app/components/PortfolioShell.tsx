@@ -13,6 +13,7 @@ import GitHubActivity from "./GitHubActivity";
 import Projects from "./Projects";
 import Posts from "./Posts";
 import GallerySection from "./GallerySection";
+import StarfieldBackground from "./StarfieldBackground";
 
 interface PortfolioShellProps {
   initialTab: TabType;
@@ -56,6 +57,10 @@ export default function PortfolioShell({ initialTab }: PortfolioShellProps) {
 
   function handleTabChange(tab: TabType) {
     if (tab === "chat") {
+      if (isChatOpen) {
+        handleCloseChat();
+        return;
+      }
       setActiveTab("chat");
       setIsChatOpen(true);
     } else {
@@ -78,7 +83,7 @@ export default function PortfolioShell({ initialTab }: PortfolioShellProps) {
 
   return (
     <main className="min-h-screen flex justify-center relative overflow-x-hidden">
-      <div aria-hidden="true" className="bg-dots" />
+      <StarfieldBackground />
       <div className="relative z-10 bg-[var(--background)] w-full max-w-3xl min-h-screen border-x-0 md:border-x border-line px-8 md:px-12 pt-0 pb-8">
         {/* Left side hatched strip */}
         <div
