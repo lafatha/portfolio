@@ -592,9 +592,11 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
 
   return (
     <>
-      {/* Backdrop for mobile */}
+      {/* Mobile: an opaque cover in the page colour hides the site behind the chat completely.
+          It extends a full screen above and below because iOS shifts the page when the keyboard opens. */}
       <div
-        className={`fixed inset-0 bg-black/40 backdrop-blur-xs z-40 md:hidden transition-opacity duration-300 motion-reduce:transition-none ${shown ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        aria-hidden="true"
+        className={`fixed inset-x-0 -top-[100vh] -bottom-[100vh] z-40 md:hidden bg-[var(--background)] transition-opacity duration-300 motion-reduce:transition-none ${shown ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         onClick={onClose}
       />
 
