@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, Fragment } from "react";
 import ChatBackdrop from "./ChatBackdrop";
-import { X, Mic, Loader2, ArrowRight, ChevronRight, ChevronDown, Brain } from "lucide-react";
+import { X, Mic, Loader2, ArrowRight, ChevronRight, ChevronDown } from "lucide-react";
 
 /* Minimal Web Speech API typings (not in TS's DOM lib). Recognition runs in the
    visitor's browser; audio never reaches this site's server. */
@@ -92,6 +92,48 @@ function secs(ms: number) {
   return `${(ms / 1000).toFixed(ms < 10000 ? 1 : 0)}s`;
 }
 
+/* 12x9 pixel brain, side view: bumpy top, folds as gaps, brain stem bottom-right */
+const BRAIN = [
+  "...##.###...",
+  ".######.###.",
+  "####.####.##",
+  "##.####.####",
+  "######.##.##",
+  ".###.#######",
+  "..#####.###.",
+  "......###...",
+  ".......##...",
+];
+const BRAIN_PIXELS = BRAIN.flatMap((row, y) =>
+  [...row].flatMap((c, x) => (c === "#" ? [{ x, y, jitter: ((x * 7 + y * 13) % 5) * 60 }] : [])),
+);
+
+/** Pixel brain; while thinking its pixels fire in a diagonal wave like neurons. */
+function PixelBrain({ active }: { active: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 12 9"
+      width={16}
+      height={12}
+      shapeRendering="crispEdges"
+      aria-hidden="true"
+      className={`pixel-brain shrink-0 ${active ? "is-active" : ""}`}
+    >
+      {BRAIN_PIXELS.map(({ x, y, jitter }) => (
+        <rect
+          key={`${x}-${y}`}
+          x={x}
+          y={y}
+          width={1}
+          height={1}
+          fill="currentColor"
+          style={active ? { animationDelay: `${(x + y) * 70 + jitter}ms` } : undefined}
+        />
+      ))}
+    </svg>
+  );
+}
+
 /** Claude-style collapsible "Thinking" header with a live timer and the pipeline steps. */
 function ThinkingBlock({ thinking }: { thinking: Thinking }) {
   const active = thinking.thoughtMs === undefined && !thinking.failed;
@@ -116,7 +158,7 @@ function ThinkingBlock({ thinking }: { thinking: Thinking }) {
         aria-expanded={open}
         className="chat-empty-desc inline-flex items-center gap-1.5 py-1 cursor-pointer transition-opacity hover:opacity-70"
       >
-        <Brain size={13} aria-hidden="true" className={active ? "animate-pulse" : "opacity-80"} />
+        <PixelBrain active={active} />
         <span className="font-medium tabular-nums">{title}</span>
         <ChevronDown
           size={12}
@@ -333,6 +375,8 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
   const [listening, setListening] = useState(false);
   const [voiceSupported, setVoiceSupported] = useState(true);
   const [voiceError, setVoiceError] = useState("");
@@ -352,6 +396,15 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
     const t = setTimeout(() => setMounted(false), 300);
     return () => clearTimeout(t);
   }, [isOpen]);
+
+  // grow the input with its text up to 3 lines, then scroll inside it
+  useEffect(() => {
+    const el = inputRef.current;
+    if (!el) return;
+    const line = parseFloat(getComputedStyle(el).lineHeight) || 20;
+    el.style.height = "auto";
+    el.style.height = `${Math.min(el.scrollHeight, line * 3)}px`;
+  }, [input, mounted]);
   // Mobile: keep the panel exactly over the visible area. When the iOS keyboard opens the layout
   // viewport doesn't shrink and the page scrolls underneath, which pushed the close button off-screen
   // and let the page show below the input. Also lock the page scroll while the chat is open.
@@ -583,8 +636,9 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
     }
   }
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter" && !e.shiftKey) {
+  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    // Enter sends, Shift+Enter adds a line; ignore Enter while an IME is composing
+    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
       handleSend();
     }
@@ -654,12 +708,12 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
                   type="button"
                   onClick={() => handleSend(q)}
                   disabled={isLoading}
-                  className="group chat-empty-desc w-full flex items-center gap-2 bg-transparent border-0 px-1 py-1 text-xs sm:text-sm text-left transition-opacity hover:opacity-70 active:opacity-70 focus-visible:opacity-70 cursor-pointer disabled:cursor-not-allowed"
+                  className="group chat-empty-desc w-full flex items-center gap-2.5 md:gap-2 bg-transparent border-0 px-1 py-2.5 md:py-1 text-[15px] md:text-sm text-left transition-opacity hover:opacity-70 active:opacity-70 focus-visible:opacity-70 cursor-pointer disabled:cursor-not-allowed"
                 >
-                  <span aria-hidden="true" className="leading-none">⠿</span>
+                  <span aria-hidden="true" className="leading-none text-base md:text-sm">⠿</span>
                   <span className="flex-1">{q}</span>
                   <ChevronRight
-                    size={14}
+                    size={16}
                     aria-hidden="true"
                     className="shrink-0 opacity-0 -translate-x-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-focus-visible:opacity-100 group-focus-visible:translate-x-0 group-active:opacity-100 group-active:translate-x-0"
                   />
@@ -668,14 +722,15 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
             </div>
           )}
           <div className="chat-input-card rounded-2xl p-3 flex flex-col justify-between gap-3 shadow-xs">
-            <input
-              type="text"
+            <textarea
+              ref={inputRef}
+              rows={1}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               disabled={isLoading}
               placeholder={listening ? "Listening..." : "How can I help you?"}
-              className="chat-input-field w-full bg-transparent text-base md:text-sm outline-none border-none focus:outline-none disabled:opacity-50"
+              className="chat-input-field block w-full resize-none bg-transparent text-base leading-6 md:text-sm md:leading-5 outline-none border-none focus:outline-none disabled:opacity-50 overflow-y-auto scrollbar-hide"
             />
 
             <div className="flex items-center justify-between pt-1">

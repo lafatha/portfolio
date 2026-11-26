@@ -44,9 +44,13 @@
   --color-line: #242424;
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+/* Firefox only: Chrome/Safari use the ::-webkit-scrollbar rules below (Chrome ignores those
+   whenever scrollbar-width is set, and would fall back to its own rounded bar) */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
 }
 
 html {
@@ -56,8 +60,8 @@ html {
 
 /* Custom WebKit Scrollbar (Chrome, Edge, Safari, Opera, Brave) */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -66,14 +70,11 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-thumb);
-  border-radius: 9999px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--scrollbar-thumb-hover);
-  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-button {
@@ -641,8 +642,22 @@ h1, h2, h3, h4, h5, h6 {
   animation: thinking-step-in 240ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
+/* pixel brain: dimmed at rest, pixels fire in a wave while thinking */
+.pixel-brain rect {
+  opacity: 0.75;
+}
+
+@keyframes brain-fire {
+  0%, 100% { opacity: 0.25; }
+  45% { opacity: 1; }
+}
+
+.pixel-brain.is-active rect {
+  animation: brain-fire 1100ms ease-in-out infinite both;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .chat-msg-in, .thinking-step { animation: none; }
+  .chat-msg-in, .thinking-step, .pixel-brain.is-active rect { animation: none; }
 }
 
 .chat-input-field {
@@ -979,3 +994,18 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* Minimal dotted backdrop: faint grey grid, fading out toward top/bottom */
+
+/* separator between meta items (company · type, degree · major): a hairline drawn in CSS instead of a "|" */
+.meta-sep {
+  display: inline-block;
+  width: 1px;
+  height: 0.9em;
+  margin: 0 0.55rem;
+  vertical-align: -0.12em;
+  border-radius: 1px;
+  background: linear-gradient(to bottom, transparent, #c4c4c8 25%, #c4c4c8 75%, transparent);
+}
+
+.theme-dark .meta-sep {
+  background: linear-gradient(to bottom, transparent, #4a4a4f 25%, #4a4a4f 75%, transparent);
+}

@@ -43,7 +43,7 @@ export default function Experience() {
                     {exp.company}
                     {exp.type && (
                       <>
-                        <span className="text-neutral-400/50 opacity-60 mx-1 font-normal">|</span>
+                        <span aria-hidden="true" className="meta-sep" />
                         {exp.type}
                       </>
                     )}

@@ -46,7 +46,7 @@ export default function Education() {
                       {item.degree}
                       {item.major && (
                         <>
-                          <span className="text-neutral-400/50 opacity-60 mx-1 font-normal">|</span>
+                          <span aria-hidden="true" className="meta-sep" />
                           {item.major}
                         </>
                       )}

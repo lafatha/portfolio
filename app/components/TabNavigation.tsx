@@ -1,6 +1,107 @@
 "use client";
 
-import { User, Briefcase, FileText, Image as ImageIcon, MessageSquare } from "lucide-react";
+/* 12x12 pixel-art tab icons; "#" = filled pixel */
+const PIXEL_ICONS = {
+  profile: [
+    "....####....",
+    "...#....#...",
+    "...#....#...",
+    "...#....#...",
+    "....####....",
+    "............",
+    "...######...",
+    "..#......#..",
+    ".#........#.",
+    ".#........#.",
+    ".##########.",
+    "............",
+  ],
+  projects: [
+    "............",
+    "....####....",
+    "....#..#....",
+    ".##########.",
+    ".#........#.",
+    ".#........#.",
+    ".####..####.",
+    ".#...##...#.",
+    ".#........#.",
+    ".#........#.",
+    ".##########.",
+    "............",
+  ],
+  posts: [
+    "..######....",
+    "..#....##...",
+    "..#....#.#..",
+    "..#....####.",
+    "..#.......#.",
+    "..#.####..#.",
+    "..#.......#.",
+    "..#.#####.#.",
+    "..#.......#.",
+    "..#.###...#.",
+    "..#.......#.",
+    "..#########.",
+  ],
+  gallery: [
+    "............",
+    "############",
+    "#..........#",
+    "#.......##.#",
+    "#.......##.#",
+    "#..........#",
+    "#...#......#",
+    "#..###..#..#",
+    "#.#####.##.#",
+    "#.##########",
+    "############",
+    "............",
+  ],
+  chat: [
+    "............",
+    ".##########.",
+    "#..........#",
+    "#..........#",
+    "#..#..#..#.#",
+    "#..........#",
+    "#..........#",
+    ".##...#####.",
+    "...#.#......",
+    "....#.......",
+    "............",
+    "............",
+  ],
+};
+
+type PixelIconName = keyof typeof PIXEL_ICONS;
+
+/** one SVG path per icon: each horizontal run of pixels becomes a rectangle */
+function pixelPath(rows: string[]) {
+  let d = "";
+  rows.forEach((row, y) => {
+    for (let x = 0; x < row.length; x++) {
+      if (row[x] !== "#") continue;
+      let w = 1;
+      while (row[x + w] === "#") w++;
+      d += `M${x} ${y}h${w}v1h-${w}z`;
+      x += w - 1;
+    }
+  });
+  return d;
+}
+
+const PIXEL_PATHS = Object.fromEntries(
+  Object.entries(PIXEL_ICONS).map(([name, rows]) => [name, pixelPath(rows)]),
+) as Record<PixelIconName, string>;
+
+function PixelIcon({ name, className = "" }: { name: PixelIconName; className?: string }) {
+  return (
+    <svg viewBox="0 0 12 12" width={18} height={18} shapeRendering="crispEdges" aria-hidden="true" className={className}>
+      <path d={PIXEL_PATHS[name]} fill="currentColor" />
+    </svg>
+  );
+}
 
 export type TabType = "profile" | "portfolio" | "posts" | "gallery" | "chat";
 
@@ -13,12 +114,12 @@ export default function TabNavigation({
   activeTab,
   onTabChange,
 }: TabNavigationProps) {
-  const tabs = [
-    { id: "profile" as const, label: "Profile", href: "/", icon: User },
-    { id: "portfolio" as const, label: "Projects", href: "/projects", icon: Briefcase },
-    { id: "posts" as const, label: "Posts", href: "/posts", icon: FileText },
-    { id: "gallery" as const, label: "Gallery", href: "/gallery", icon: ImageIcon },
-    { id: "chat" as const, label: "Chat", href: null, icon: MessageSquare },
+  const tabs: { id: TabType; label: string; href: string | null; icon: PixelIconName }[] = [
+    { id: "profile" as const, label: "Profile", href: "/", icon: "profile" },
+    { id: "portfolio" as const, label: "Projects", href: "/projects", icon: "projects" },
+    { id: "posts" as const, label: "Posts", href: "/posts", icon: "posts" },
+    { id: "gallery" as const, label: "Gallery", href: "/gallery", icon: "gallery" },
+    { id: "chat" as const, label: "Chat", href: null, icon: "chat" },
   ];
 
   return (
@@ -28,7 +129,6 @@ export default function TabNavigation({
     >
       <div className="grid grid-cols-5 max-w-lg mx-auto">
         {tabs.map((tab) => {
-          const Icon = tab.icon;
           const isActive = activeTab === tab.id;
           const commonClassName = `tab-underline-btn group relative h-12 flex items-center justify-center cursor-pointer border-b-2 transition-colors duration-200 outline-none focus:outline-none select-none ${
             isActive
@@ -38,10 +138,9 @@ export default function TabNavigation({
 
           const content = (
             <div className="flex items-center justify-center">
-              <Icon
-                size={20}
-                strokeWidth={isActive ? 1.75 : 1.4}
-                className="shrink-0 transition-transform duration-200"
+              <PixelIcon
+                name={tab.icon}
+                className="shrink-0 transition-transform duration-200 group-hover:-translate-y-px"
               />
               <span
                 className={`tab-label-text hidden md:inline-block overflow-hidden whitespace-nowrap text-sm tracking-tight transition-all duration-300 ease-out ${
