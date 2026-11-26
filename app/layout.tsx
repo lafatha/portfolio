@@ -10,6 +10,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
+  // Android Chrome: shrink the layout when the keyboard opens so the chat input stays in view
+  interactiveWidget: "resizes-content",
 };
 
 

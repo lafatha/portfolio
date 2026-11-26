@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 import ChatBackdrop from "./ChatBackdrop";
 import { X, Mic, Loader2, ArrowRight, ChevronRight, ChevronDown, Brain } from "lucide-react";
 
@@ -198,7 +198,7 @@ function linkLabel(url: string) {
 /** **bold**, [text](url) and bare URLs; trailing punctuation stays outside links */
 function renderInline(text: string, keyBase: string) {
   const out: React.ReactNode[] = [];
-  const re = /\*\*(.+?)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s)]+[^\s).,!?;:'"])/g;
+  const re = /\*\*(.+?)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s)]+[^\s).,!?;:'"])|([\w.+-]+@[\w-]+(?:\.[\w-]+)+)/g;
   let last = 0;
   let m: RegExpExecArray | null;
   let i = 0;
@@ -210,6 +210,12 @@ function renderInline(text: string, keyBase: string) {
         <strong key={key} className="font-semibold">
           {m[1]}
         </strong>,
+      );
+    } else if (m[5] !== undefined) {
+      out.push(
+        <a key={key} href={`mailto:${m[5]}`} className="underline decoration-current/30 underline-offset-2 hover:decoration-current">
+          {m[5]}
+        </a>,
       );
     } else {
       const href = m[3] ?? m[4];
@@ -269,7 +275,31 @@ function renderFormattedText(text: string) {
         }
         if (block.kind === "p") {
           if (block.lines.length === 0) return null;
-          return <p key={bi}>{renderInline(block.lines.join(" "), `p${bi}`)}</p>;
+          // several "LinkedIn: url" style lines read best as a list with the labels in bold
+          const labeled = block.lines.map((l) =>
+            l.replace(/^\*\*(.+?)\*\*/, "$1").match(/^([A-Za-z][\w &/.+-]{0,30}?):\s+(.+)$/),
+          );
+          if (block.lines.length >= 2 && labeled.every(Boolean)) {
+            return (
+              <ul key={bi} className="space-y-2 pl-5 list-disc marker:text-neutral-400 dark:marker:text-neutral-500">
+                {labeled.map((m, li) => (
+                  <li key={li} className="pl-0.5">
+                    <span className="font-semibold">{m![1]}:</span> {renderInline(m![2], `kv${bi}-${li}`)}
+                  </li>
+                ))}
+              </ul>
+            );
+          }
+          return (
+            <p key={bi}>
+              {block.lines.map((line, li) => (
+                <Fragment key={li}>
+                  {li > 0 && <br />}
+                  {renderInline(line, `p${bi}-${li}`)}
+                </Fragment>
+              ))}
+            </p>
+          );
         }
         const List = block.kind === "ul" ? "ul" : "ol";
         return (
@@ -302,6 +332,7 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
   const [listening, setListening] = useState(false);
   const [voiceSupported, setVoiceSupported] = useState(true);
   const [voiceError, setVoiceError] = useState("");
@@ -321,6 +352,50 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
     const t = setTimeout(() => setMounted(false), 300);
     return () => clearTimeout(t);
   }, [isOpen]);
+  // Mobile: keep the panel exactly over the visible area. When the iOS keyboard opens the layout
+  // viewport doesn't shrink and the page scrolls underneath, which pushed the close button off-screen
+  // and let the page show below the input. Also lock the page scroll while the chat is open.
+  useEffect(() => {
+    if (!mounted) return;
+    const panel = panelRef.current;
+    const vv = window.visualViewport;
+    const mobile = window.matchMedia("(max-width: 767px)");
+    const root = document.documentElement;
+    const prevRoot = root.style.overflow;
+    const prevBody = document.body.style.overflow;
+
+    const fit = () => {
+      if (!panel) return;
+      if (mobile.matches && vv) {
+        panel.style.top = `${vv.offsetTop}px`;
+        panel.style.height = `${vv.height}px`;
+        panel.style.bottom = "auto";
+      } else {
+        panel.style.top = panel.style.height = panel.style.bottom = "";
+      }
+    };
+    const lock = () => {
+      const on = mobile.matches;
+      root.style.overflow = on ? "hidden" : prevRoot;
+      document.body.style.overflow = on ? "hidden" : prevBody;
+    };
+
+    fit();
+    lock();
+    vv?.addEventListener("resize", fit);
+    vv?.addEventListener("scroll", fit);
+    mobile.addEventListener("change", fit);
+    mobile.addEventListener("change", lock);
+    return () => {
+      vv?.removeEventListener("resize", fit);
+      vv?.removeEventListener("scroll", fit);
+      mobile.removeEventListener("change", fit);
+      mobile.removeEventListener("change", lock);
+      root.style.overflow = prevRoot;
+      document.body.style.overflow = prevBody;
+    };
+  }, [mounted]);
+
   const recRef = useRef<Recognizer | null>(null);
   const sendRef = useRef<(text?: string, spoken?: boolean) => void>(() => {});
 
@@ -524,10 +599,10 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
       />
 
       {/* Slide-over Right Chat Panel */}
-      <aside className={`chat-panel-container fixed right-0 top-0 bottom-0 z-50 border-l border-line shadow-2xl transition-transform duration-300 ease-in-out motion-reduce:transition-none ${shown ? "translate-x-0" : "translate-x-full pointer-events-none"} flex flex-col w-full md:left-[calc(50%+384px)] md:right-0 md:w-auto min-w-[280px] overflow-hidden`}>
+      <aside ref={panelRef} className={`chat-panel-container fixed right-0 top-0 bottom-0 z-50 border-l border-line shadow-2xl transition-transform duration-300 ease-in-out motion-reduce:transition-none ${shown ? "translate-x-0" : "translate-x-full pointer-events-none"} flex flex-col w-full md:left-[calc(50%+384px)] md:right-0 md:w-auto min-w-[280px] overflow-hidden`}>
         <ChatBackdrop dim={messages.length > 0} />
         {/* Close button only on mobile, where the panel covers the tab bar; on desktop the Chat tab toggles it */}
-        <div className="relative z-10 flex md:hidden items-center justify-end px-4 h-14 shrink-0">
+        <div className="relative z-20 flex md:hidden items-center justify-end px-4 h-14 shrink-0">
           <button
             type="button"
             onClick={onClose}
@@ -539,7 +614,7 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
         </div>
 
         {/* Chat Messages Body */}
-        <div className="relative z-10 flex-1 p-4 overflow-y-auto space-y-3.5 scrollbar-hide">
+        <div className="relative z-10 flex-1 min-h-0 p-4 overflow-y-auto overscroll-contain space-y-3.5 scrollbar-hide">
           {messages.length === 0 ? (
             null
           ) : (
@@ -568,7 +643,7 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
         </div>
 
         {/* Bottom Input Area Card */}
-        <div className="relative z-10 p-4">
+        <div className="relative z-10 shrink-0 p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
           {messages.length === 0 && (
             <div className="flex flex-col gap-1 mb-6">
               {SUGGESTIONS.map((q) => (
@@ -598,7 +673,7 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
               onKeyDown={handleKeyDown}
               disabled={isLoading}
               placeholder={listening ? "Listening..." : "How can I help you?"}
-              className="chat-input-field w-full bg-transparent text-xs sm:text-sm outline-none border-none focus:outline-none disabled:opacity-50"
+              className="chat-input-field w-full bg-transparent text-base md:text-sm outline-none border-none focus:outline-none disabled:opacity-50"
             />
 
             <div className="flex items-center justify-between pt-1">
