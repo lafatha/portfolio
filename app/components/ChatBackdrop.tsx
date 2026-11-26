@@ -172,7 +172,7 @@ export default function ChatBackdrop() {
         const sx = Math.floor(rand() * W), sy = Math.floor(rand() * H);
         const b = Math.pow(rand(), 2.2), big = rand() < 0.07 ? 1 : 0;
         if (blocked[sy * W + sx]) continue;
-        list.push(sx, sy, b, rand() * 6.283, 0.0008 + rand() * 0.002, big);
+        list.push(sx, sy, b, rand() * 6.283, 0.00015 + rand() * 0.00035, big);
       }
       stars = new Float32Array(list);
     }
